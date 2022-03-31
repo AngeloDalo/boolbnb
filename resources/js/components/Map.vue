@@ -1,6 +1,6 @@
 <template>
   <div>
-      Mappa fantastica
+      Mappa fantastica magica
   </div>
 </template>
 
