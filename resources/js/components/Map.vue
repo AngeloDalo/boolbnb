@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div>
     <div class="map" id="map" ref="mapRef"></div>
   </div>
 </template>
@@ -21,22 +21,25 @@ export default {
     key: '2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z',
     container: this.$refs.mapRef,
     center: [17.277969, 40.4657082],
-    zoom: 10
-  });
+    zoom: 14
+    });
 
-
-  //Here I get error
-  new tt.Marker()
+    new tt.Marker()
       .setLngLat([17.277969, 40.4657082])
       .addTo(this.map);
+
+    this.map.addControl(new tt.FullscreenControl());
+    this.map.addControl(new tt.NavigationControl());
+
     }
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#map { 
-    height: 50vh; 
-    width: 50vw; 
-} 
+#map {
+    height: 90vh;
+    width: 90vw;
+}
 </style>
