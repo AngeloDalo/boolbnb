@@ -82,6 +82,9 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         // $services = Service::where();
+        if (Auth::user()->id != $apartment->user_id) {
+            abort('403');
+        }
         return view('admin.apartments.show', ['apartment' => $apartment]);
     }
 
@@ -94,7 +97,7 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         if (Auth::user()->id != $apartment->user_id) {
-            abort('403');
+            return redirect()->route('admin.apartments.index');
         }
         $services = Service::all();
         return view('admin.apartments.edit', ['apartment' => $apartment, 'services' => $services]);
@@ -111,7 +114,7 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
         if (Auth::user()->id != $apartment->user_id) {
-            abort('403');
+            return redirect()->route('admin.apartments.index');
         }
         $validateData = $request->validate([
             'title' => 'required|max:255',
