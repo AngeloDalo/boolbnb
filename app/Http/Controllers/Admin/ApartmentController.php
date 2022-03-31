@@ -93,6 +93,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        if (Auth::user()->id != $apartment->user_id) {
+            abort('403');
+        }
         $services = Service::all();
         return view('admin.apartments.edit', ['apartment' => $apartment, 'services' => $services]);
     }
