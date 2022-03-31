@@ -83,7 +83,7 @@ class ApartmentController extends Controller
     {
         // $services = Service::where();
         if (Auth::user()->id != $apartment->user_id) {
-            abort('403');
+            return redirect()->route('admin.apartments.index');
         }
         return view('admin.apartments.show', ['apartment' => $apartment]);
     }
