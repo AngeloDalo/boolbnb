@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <Search />
-    <Map />
-  </div>
+    <div>
+        <Map/>
+    </div>
 </template>
 
 <script>
-import Map from '../components/Map.vue';
-import Search from '../components/Search.vue';
+import Map from "../components/Map.vue";
 export default {
-    name: 'App',
+    name: "App",
     components: {
-      Map,
-      Search,
-    }
-}
+        Map,
+    },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
