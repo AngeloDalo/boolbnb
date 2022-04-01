@@ -9,27 +9,20 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ApartmentController extends Controller
 {
-    public function index($lng, $lat) {
+    public function index($lng, $lat)
+    {
         $apartmentsFiltered = [];
-        $searchingLat = floatval(str_replace(".", ",", $lat));
-        $searchingLng = floatval(str_replace(".", ",", $lng));
+        $lat1 = $lat;
+        $lon1 = $lng;
         $apartments = Apartment::orderBy('created_at', 'desc')->get();
-        
+
         foreach ($apartments as $apartment) {
-            // var_dump($apartment['latitude']);
-            // var_dump($apartment['longitude']);
-            $apartmentLat = floatval(str_replace(".", ",", $apartment['latitude']));
-            $apartmentLng = floatval(str_replace(".", ",", $apartment['longitude']));
-
-            
-            $distance = sqrt(pow(($apartmentLat - $searchingLat), 2) + pow(($apartmentLng - $searchingLng), 2));
-            // var_dump(pow(($apartmentLat - $searchingLat),2));
-            // var_dump(pow(($apartmentLng - $searchingLng), 2));
-            var_dump($distance / 1000);
-
-
+            $lat2 = $apartment['latitude'];
+            $lon2 = $apartment['longitude'];
+            $distance = rad2deg(acos(sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($lon1 - $lon2)))) * 60 * 1.1515;
+            var_dump($distance * 1.609344);
         }
-        
+
         // return response()->json([
         //     'response' => true,
         //     'results' => $position,

@@ -17,7 +17,7 @@
                 <button
                     type="button"
                     class="btn btn-primary"
-                    @click="search()" 
+                    @click="search()"
 					value="Submit form"
                 >
                     <i class="fas fa-search"></i>
