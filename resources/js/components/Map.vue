@@ -75,12 +75,13 @@ export default {
         },
         handleResults: function (result) {
             if (result.results) {
-				const lnglat = result.results[0].position;
+				let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
 				console.log(lnglat);
-				Axios.post('http://127.0.0.1:8000/api/v1/apartments', lnglat).then((result) => {
+				const url = 'http://127.0.0.1:8000/api/v1/apartments/search&lat=' + this.position.lat + '&lng=' + this.position.lng;
+				Axios.get(url).then((result) => {
 					// this.positionSearch = result.data.results;
-					console.log('axios', result.data.results);
+					console.log(result);
 				}).catch((error) => {
 					console.log(error);
 				})
