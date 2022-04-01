@@ -23,6 +23,7 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
+			<!-- mappa -->
         <div class="map" id="map" ref="mapRef"></div>
     </div>
 </template>
@@ -30,6 +31,7 @@
 <script>
 import tt from "@tomtom-international/web-sdk-maps";
 import tts from "@tomtom-international/web-sdk-services";
+import Axios from "axios";
 export default {
     name: "Map",
     data() {
@@ -73,7 +75,15 @@ export default {
         },
         handleResults: function (result) {
             if (result.results) {
-                this.moveMap(result.results[0].position);
+				const lnglat = result.results[0].position;
+                this.moveMap(lnglat);
+				console.log(lnglat);
+				Axios.post('http://127.0.0.1:8000/api/v1/apartments', lnglat).then((result) => {
+					// this.positionSearch = result.data.results;
+					console.log('axios', result.data.results);
+				}).catch((error) => {
+					console.log(error);
+				})
             }
             this.position.lng = result.results[0].position.lng;
             this.position.lat = result.results[0].position.lat;

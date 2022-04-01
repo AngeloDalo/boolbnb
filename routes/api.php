@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/v1/apartments', 'Api\ApartmentController@index');
+// Route::get('/posts/random', 'Api\PostController@inRandomOrder');
+Route::post('/v1/apartments/{position}', 'Api\ApartmentController@show');
