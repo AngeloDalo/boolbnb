@@ -25,13 +25,13 @@
                     <option value="60">60Km</option>
                 </select>
             </div>
-            <div class="form-check">
+            <div class="form-check" v-for="(service, index) in services" :key="index">
+                <label :for="service.id">{{ service.name }}</label>
                 <input
                     class="form-check-input position-static"
                     type="checkbox"
-                    id="blankCheckbox"
-                    value="option1"
-                    aria-label="..."
+                    :id="service.id"
+                    :value="service.name"
                 />
             </div>
             <button
@@ -65,15 +65,28 @@ export default {
             },
             apartments: [],
             filteredApartments: [],
+            services: [],
             km: 20,
         };
     },
-
+    created() {
+        },
     mounted() {
         this.initializeMap(this.position.lng, this.position.lat);
         this.getApartments();
+        this.getServices();
     },
     methods: {
+        getServices: function () {
+            const url = "http://127.0.0.1:8000/api/v1/services";
+            Axios.get(url)
+                .then((result) => {
+                    this.services = result.data.results;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         getApartments: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments";
             Axios.get(url)

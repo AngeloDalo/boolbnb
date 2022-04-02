@@ -21,4 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/v1/apartments', 'Api\ApartmentController@index');
 // Route::get('/posts/random', 'Api\PostController@inRandomOrder');
-Route::post('/v1/apartments/{position}', 'Api\ApartmentController@show');
+// Route::post('/v1/apartments/{position}', 'Api\ApartmentController@show');
+Route::get('/v1/services', 'Api\ServiceController@index');
