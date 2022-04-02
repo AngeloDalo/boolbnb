@@ -72,6 +72,7 @@ export default {
             filteredApartments: [],
             services: [],
             checkedServices: [],
+            apartment_services: [],
             km: 20,
         };
     },
@@ -86,7 +87,8 @@ export default {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
             Axios.post(url, {services: this.checkedServices})
                 .then((result) => {
-                    console.log(result.data.results);
+                    
+                    this.apartment_services = result.data.results;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -152,7 +154,6 @@ export default {
         },
         handleResults: function (result) {
             if (result.results) {
-                this.getCheckedServices();
                 this.position.lng = result.results[0].position.lng;
                 this.position.lat = result.results[0].position.lat;
                 this.query = "";
@@ -163,6 +164,7 @@ export default {
                     this.position.lat
                 );
 
+                let KmFilterApartment = [];
                 // cicliamo sugli appartementi
                 this.apartments.forEach((apartment) => {
                     let llApartment = new tt.LngLat(
@@ -174,12 +176,24 @@ export default {
 
                     // restituiamo gli app entro i 20 km
                     if (distanceKm <= this.km) {
-                        this.filteredApartments.push(apartment);
+                        KmFilterApartment.push(apartment);
                     }
                 });
+
+                KmFilterApartment.forEach(apartment => {
+                    // console.log(apartment.id);
+                    this.apartment_services.forEach(element => {
+                        console.log(element);
+                        if (apartment.id == element.id) {
+                            this.filteredApartments.push(apartment);
+                        }
+                    });
+                });
+                console.log(this.filteredApartments);
             }
         },
         search: function () {
+            this.getCheckedServices();
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
