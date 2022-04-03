@@ -69,6 +69,7 @@ export default {
                 lat: 41.8933203,
             },
             apartments: [],
+            KmFilterApartment: [],
             filteredApartments: [],
             services: [],
             checkedServices: [],
@@ -83,12 +84,77 @@ export default {
         this.getServices();
     },
     methods: {
+        search: function () {
+            let error = document.getElementById("searchDemo");
+            let message = "";
+            if (this.validateSearch()) {
+                this.filteredApartments = [];
+                this.getCheckedServices();
+                this.getKmApartments();
+                error.innerHTML = "";
+                error.classList.remove("alert");
+                error.classList.remove("alert-danger");
+                tts.services
+                    .fuzzySearch({
+                        key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
+                        query: this.query,
+                    })
+                    .then(this.handleResults);
+            } else {
+                this.query = null;
+                message = "adress not valid";
+                error.innerHTML = message;
+                error.classList.add("alert");
+                error.classList.add("alert-danger");
+            }
+        },
+
+        getKmApartments: function () {
+                let llSearching = new tt.LngLat(
+                    this.position.lng,
+                    this.position.lat
+                );
+                // cicliamo sugli appartementi
+                this.apartments.forEach((apartment) => {
+                    let llApartment = new tt.LngLat(
+                        apartment.longitude,
+                        apartment.latitude
+                    );
+                    let distance = llSearching.distanceTo(llApartment);
+                    let distanceKm = distance / 1000;
+
+                    // restituiamo gli app entro i 20 km
+                    if (distanceKm <= this.km) {
+                        this.KmFilterApartment.push(apartment);
+                    }
+                });
+                console.log(this.KmFilterApartment);
+                // KmFilterApartment.forEach(apartment => {
+                //     //console.log(apartment.id);
+                //     this.apartment_services.forEach(element => {
+                //         //console.log(element);
+                //         if (apartment.id == element.id) {
+                //             this.filteredApartments.push(apartment);
+                //         }
+                //     });
+                // });
+                // console.log(this.filteredApartments);
+        },
+
+
+        validateSearch: function () {
+            if (this.query && isNaN(this.query)) {
+                return true;
+            } else {
+                return false;
+            }
+        },
         getCheckedServices: function() {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
             Axios.post(url, {services: this.checkedServices})
                 .then((result) => {
-                    
-                    this.apartment_services = result.data.results;
+                    console.log(result.data.results.data);
+                    this.apartment_services = result.data.results.data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -129,11 +195,12 @@ export default {
                     console.log(error);
                 });
         },
-        validateSearch: function () {
-            if (this.query && isNaN(this.query)) {
-                return true;
-            } else {
-                return false;
+        handleResults: function (result) {
+            if (result.results) {
+                this.position.lng = result.results[0].position.lng;
+                this.position.lat = result.results[0].position.lat;
+                let lnglat = result.results[0].position;
+                this.moveMap(lnglat);
             }
         },
         initializeMap(lng, lat) {
@@ -151,69 +218,6 @@ export default {
                 center: lnglat,
                 zoom: 12,
             });
-        },
-        handleResults: function (result) {
-            if (result.results) {
-                this.position.lng = result.results[0].position.lng;
-                this.position.lat = result.results[0].position.lat;
-                this.query = "";
-                let lnglat = result.results[0].position;
-                this.moveMap(lnglat);
-                let llSearching = new tt.LngLat(
-                    this.position.lng,
-                    this.position.lat
-                );
-
-                let KmFilterApartment = [];
-                // cicliamo sugli appartementi
-                this.apartments.forEach((apartment) => {
-                    let llApartment = new tt.LngLat(
-                        apartment.longitude,
-                        apartment.latitude
-                    );
-                    let distance = llSearching.distanceTo(llApartment);
-                    let distanceKm = distance / 1000;
-
-                    // restituiamo gli app entro i 20 km
-                    if (distanceKm <= this.km) {
-                        KmFilterApartment.push(apartment);
-                    }
-                });
-
-                KmFilterApartment.forEach(apartment => {
-                    // console.log(apartment.id);
-                    this.apartment_services.forEach(element => {
-                        console.log(element);
-                        if (apartment.id == element.id) {
-                            this.filteredApartments.push(apartment);
-                        }
-                    });
-                });
-                console.log(this.filteredApartments);
-            }
-        },
-        search: function () {
-            this.getCheckedServices();
-            let error = document.getElementById("searchDemo");
-            let message = "";
-            if (this.validateSearch()) {
-                this.filteredApartments = [];
-                error.innerHTML = "";
-                error.classList.remove("alert");
-                error.classList.remove("alert-danger");
-                tts.services
-                    .fuzzySearch({
-                        key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
-                        query: this.query,
-                    })
-                    .then(this.handleResults);
-            } else {
-                this.query = null;
-                message = "adress not valid";
-                error.innerHTML = message;
-                error.classList.add("alert");
-                error.classList.add("alert-danger");
-            }
         },
     },
 };
