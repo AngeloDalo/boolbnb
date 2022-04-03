@@ -164,7 +164,7 @@ export default {
                 this.position.lat
             );
             // cicliamo sugli appartementi
-            // let counter = 0;
+            let counter = 0;
             this.apartments.forEach((apartment) => {
                 let llApartment = new tt.LngLat(
                     apartment.longitude,
@@ -180,9 +180,9 @@ export default {
                     apartment.rooms >= this.rooms &&
                     apartment.beds >= this.beds
                 ) {
-                    // counter += 1;
-                    // this.allDistances.push(distanceKm);
-                    this.KmFilterApartment.push(apartment).sort((distanceKm) => llSearching);
+                    counter += 1;
+                    this.allDistances.push(distanceKm);
+                    this.KmFilterApartment.push(apartment);
                     // console.log(this.KmFilterApartment);
                     // if (counter >= 2) {
                     //     for (let index = counter; index >= 0; index--) {
@@ -197,6 +197,15 @@ export default {
                     console.log(this.KmFilterApartment);
                 }
             });
+            for (let i = 0; i < counter; i++) {
+                for (let j = 0; j < counter; j++) {
+                    if (this.allDistances[j] > this.allDistances[j + 1]) {
+                        let temp = this.KmFilterApartment[j];
+                        this.KmFilterApartment[j] = this.KmFilterApartment[j + 1];
+                        this.KmFilterApartment[j + 1] = temp;
+                    }
+                }   
+            }
         },
 
         validateSearch: function () {
