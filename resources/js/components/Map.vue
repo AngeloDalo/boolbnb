@@ -114,6 +114,7 @@ export default {
             },
             apartments: [],
             KmFilterApartment: [],
+            allDistances: [],
             filteredApartments: [],
             services: [],
             checkedServices: [],
@@ -163,6 +164,7 @@ export default {
                 this.position.lat
             );
             // cicliamo sugli appartementi
+            // let counter = 0;
             this.apartments.forEach((apartment) => {
                 let llApartment = new tt.LngLat(
                     apartment.longitude,
@@ -170,13 +172,29 @@ export default {
                 );
                 let distance = llSearching.distanceTo(llApartment);
                 let distanceKm = distance / 1000;
+                // console.log(counter);
+
                 // restituiamo gli app entro i 20 km
                 if (
                     distanceKm <= this.km &&
                     apartment.rooms >= this.rooms &&
                     apartment.beds >= this.beds
                 ) {
-                    this.KmFilterApartment.push(apartment);
+                    // counter += 1;
+                    // this.allDistances.push(distanceKm);
+                    this.KmFilterApartment.push(apartment).sort((distanceKm) => llSearching);
+                    // console.log(this.KmFilterApartment);
+                    // if (counter >= 2) {
+                    //     for (let index = counter; index >= 0; index--) {
+                    //         if (this.allDistances[index] < this.allDistances[index - 1]) {
+                    //             let sentinellaKm = this.KmFilterApartment[index - 1];
+                    //             this.KmFilterApartment[index - 1] = this.KmFilterApartment[index];
+                    //             this.KmFilterApartment[index] = sentinellaKm;
+                    //         }
+                    //     }
+                        
+                    // }
+                    console.log(this.KmFilterApartment);
                 }
             });
         },
