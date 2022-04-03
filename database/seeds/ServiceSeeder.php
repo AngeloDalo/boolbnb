@@ -18,52 +18,49 @@ class ServiceSeeder extends Seeder
                 'name' => 'WiFi',
             ],
             [
-                'name' => 'Posto Macchina',
+                'name' => 'Parking',
             ],
             [
-                'name' => 'Piscina',
+                'name' => 'Pool',
             ],
             [
-                'name' => 'Portineria',
+                'name' => 'Reception',
             ],
             [
                 'name' => 'Sauna',
             ],
             [
-                'name' => 'Vista Mare',
+                'name' => 'See view',
             ],
             [
                 'name' => 'Bidet',
             ],
             [
-                'name' => 'Cuscini, coperte extra',
+                'name' => 'Pillows, blankets extra',
             ],
             [
-                'name' => 'Ferro da stiro',
+                'name' => 'Electric iron',
             ],
             [
-                'name' => 'Aria condizionata',
+                'name' => 'Air conditioning',
             ],
             [
-                'name' => 'Cucina',
+                'name' => 'Kitchen',
             ],
             [
-                'name' => 'Balcone',
+                'name' => 'Balcony',
             ],
             [
                 'name' => 'TV',
             ],
             [
-                'name' => 'Cassaforte',
+                'name' => 'Safe',
             ],
             [
-                'name' => 'Colazione',
+                'name' => 'Breakfast',
             ],
             [
-                'name' => 'Macchina del caffé',
-            ],
-            [
-                'name' => 'Tavolo da pranzo',
+                'name' => 'Coffee machine',
             ],
         ];
 

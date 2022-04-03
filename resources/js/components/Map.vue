@@ -1,99 +1,115 @@
 <template>
-    <div>
+    <div class="container">
         <!-- search bar  -->
-        <div class="input-group my-5 justify-content-center flex-column">
-            <div class="form-outline">
+        <div
+            class="input-group my-5 justify-content-center flex-column align-items-center"
+        >
+            <div class="form-outline d-flex">
                 <input
                     type="search"
                     id="searchBar"
-                    class="form-control"
+                    class="form-control me-2"
                     placeholder="Search"
                     v-model="query"
                     @keyup.enter="search()"
                     required
                 />
                 <p id="searchDemo"></p>
-            </div>
-            <div>
-                <div class="col-auto my-1">
-                    <select
-                        class="custom-select mr-sm-2"
-                        id="inlineFormCustomSelect"
-                        v-model="km"
-                    >
-                        <option value="20" selected>20Km</option>
-                        <option value="40">40Km</option>
-                        <option value="60">60Km</option>
-                    </select>
-                </div>
-                <div class="col-auto my-1">
-                    <label>Number of rooms</label>
-                    <select
-                        class="custom-select mr-sm-2"
-                        id="inlineFormCustomSelect"
-                        v-model="rooms"
-                    >
-                        <option value="1" selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5+</option>
-                    </select>
-                </div>
-                <div class="col-auto my-1">
-                    <label>Number of beds</label>
-                    <select
-                        class="custom-select mr-sm-2"
-                        id="inlineFormCustomSelect"
-                        v-model="beds"
-                    >
-                        <option value="1" selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5+</option>
-                    </select>
-                </div>
-                <div
-                    class="form-check"
-                    v-for="(service, index) in services"
-                    :key="index"
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    @click="search()"
+                    value="Submit form"
                 >
-                    <label :for="service.id">{{ service.name }}</label>
-                    <input
-                        class="form-check-input position-static"
-                        type="checkbox"
-                        :id="service.id"
-                        :value="service.name"
-                        v-model="checkedServices"
-                    />
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div>
+                <div class="d-flex justify-content-evenly my-3">
+                    <div class="col-auto my-1">
+                        <label>Distance</label>
+                        <select
+                            class="custom-select mr-sm-2"
+                            id="inlineFormCustomSelect"
+                            v-model="km"
+                        >
+                            <option value="20" selected>20Km</option>
+                            <option value="40">40Km</option>
+                            <option value="60">60Km</option>
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                        <label>Number of rooms</label>
+                        <select
+                            class="custom-select mr-sm-2"
+                            id="inlineFormCustomSelect"
+                            v-model="rooms"
+                        >
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                        <label>Number of beds</label>
+                        <select
+                            class="custom-select mr-sm-2"
+                            id="inlineFormCustomSelect"
+                            v-model="beds"
+                        >
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex row">
+                    <div
+                        class="form-check col-3"
+                        v-for="(service, index) in services"
+                        :key="index"
+                    >
+                        <label :for="service.id">{{ service.name }}</label>
+                        <input
+                            class="form-check-input position-static"
+                            type="checkbox"
+                            :id="service.id"
+                            :value="service.name"
+                            v-model="checkedServices"
+                        />
+                    </div>
                 </div>
             </div>
-            <button
-                type="button"
-                class="btn btn-primary"
-                @click="search()"
-                value="Submit form"
-            >
-                <i class="fas fa-search"></i>
-            </button>
         </div>
 
         <!-- mappa -->
-        <div class="map" id="map" ref="mapRef"></div>
-
-        <div>
-            <h1>appartamenti</h1>
-            <div v-if="filteredApartments.length == 0">
-                <h2 v-for="apartment in KmFilterApartment" :key="apartment.id">
-                    {{ apartment.title }}
-                </h2>
+        <div class="d-flex justify-content-between p-3">
+            <div>
+                <h1>appartamenti</h1>
+                <div v-if="filteredApartments.length == 0">
+                    <h2
+                        v-for="apartment in KmFilterApartment"
+                        :key="apartment.id"
+                    >
+                        {{ apartment.title }}
+                    </h2>
+                </div>
+                <div v-else>
+                    <h2
+                        v-for="apartment in filteredApartments"
+                        :key="apartment.id"
+                    >
+                        {{ apartment.title }}
+                    </h2>
+                </div>
             </div>
-            <div v-else>
-                <h2 v-for="apartment in filteredApartments" :key="apartment.id">
-                    {{ apartment.title }}
-                </h2>
-            </div>
+            <div class="map" id="map" ref="mapRef"></div>
         </div>
     </div>
 </template>
@@ -189,10 +205,11 @@ export default {
                 for (let j = 0; j < counter; j++) {
                     if (this.allDistances[j] > this.allDistances[j + 1]) {
                         let temp = this.KmFilterApartment[j];
-                        this.KmFilterApartment[j] = this.KmFilterApartment[j + 1];
+                        this.KmFilterApartment[j] =
+                            this.KmFilterApartment[j + 1];
                         this.KmFilterApartment[j + 1] = temp;
                     }
-                }   
+                }
             }
         },
 
@@ -272,7 +289,7 @@ export default {
                 key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
                 container: this.$refs.mapRef,
                 center: [lng, lat],
-                zoom: 12,
+                zoom: 9,
             });
             this.map.addControl(new tt.FullscreenControl());
             this.map.addControl(new tt.NavigationControl());
@@ -280,7 +297,7 @@ export default {
         moveMap: function (lnglat) {
             this.map.flyTo({
                 center: lnglat,
-                zoom: 12,
+                zoom: 9,
             });
         },
     },
@@ -289,8 +306,8 @@ export default {
 
 <style lang="scss" scoped>
 #map {
-    height: 90vh;
-    width: 90vw;
+    width: 45%;
+    height: 40vh;
 }
 div.form-outline {
     width: 60%;
