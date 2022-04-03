@@ -14,30 +14,32 @@
                 />
                 <p id="searchDemo"></p>
             </div>
-            <div class="col-auto my-1">
-                <select
-                    class="custom-select mr-sm-2"
-                    id="inlineFormCustomSelect"
-                    v-model="km"
+            <div v-if="firstSearch">
+                <div class="col-auto my-1">
+                    <select
+                        class="custom-select mr-sm-2"
+                        id="inlineFormCustomSelect"
+                        v-model="km"
+                    >
+                        <option value="20" selected>20Km</option>
+                        <option value="40">40Km</option>
+                        <option value="60">60Km</option>
+                    </select>
+                </div>
+                <div
+                    class="form-check"
+                    v-for="(service, index) in services"
+                    :key="index"
                 >
-                    <option value="20" selected>20Km</option>
-                    <option value="40">40Km</option>
-                    <option value="60">60Km</option>
-                </select>
-            </div>
-            <div
-                class="form-check"
-                v-for="(service, index) in services"
-                :key="index"
-            >
-                <label :for="service.id">{{ service.name }}</label>
-                <input
-                    class="form-check-input position-static"
-                    type="checkbox"
-                    :id="service.id"
-                    :value="service.name"
-                    v-model="checkedServices"
-                />
+                    <label :for="service.id">{{ service.name }}</label>
+                    <input
+                        class="form-check-input position-static"
+                        type="checkbox"
+                        :id="service.id"
+                        :value="service.name"
+                        v-model="checkedServices"
+                    />
+                </div>
             </div>
             <button
                 type="button"
@@ -74,6 +76,7 @@ export default {
             services: [],
             checkedServices: [],
             apartment_services: [],
+            firstSearch: false,
             km: 20,
         };
     },
@@ -85,21 +88,35 @@ export default {
     },
     methods: {
         search: function () {
+            this.KmFilterApartment = [];
+            this.apartment_services = [];
+
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
-                this.filteredApartments = [];
-                this.getCheckedServices();
-                this.getKmApartments();
-                error.innerHTML = "";
-                error.classList.remove("alert");
-                error.classList.remove("alert-danger");
-                tts.services
-                    .fuzzySearch({
-                        key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
-                        query: this.query,
-                    })
-                    .then(this.handleResults);
+                if (this.firstSearch) {
+                    this.filteredApartments = [];
+                    this.getCheckedServices();
+                    error.innerHTML = "";
+                    error.classList.remove("alert");
+                    error.classList.remove("alert-danger");
+                    tts.services
+                        .fuzzySearch({
+                            key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
+                            query: this.query,
+                        })
+                        .then(this.handleResults);
+                } else {
+                    error.innerHTML = "";
+                    error.classList.remove("alert");
+                    error.classList.remove("alert-danger");
+                    tts.services
+                        .fuzzySearch({
+                            key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
+                            query: this.query,
+                        })
+                        .then(this.handleResults);
+                }
             } else {
                 this.query = null;
                 message = "adress not valid";
@@ -110,37 +127,26 @@ export default {
         },
 
         getKmApartments: function () {
-                let llSearching = new tt.LngLat(
-                    this.position.lng,
-                    this.position.lat
+            let llSearching = new tt.LngLat(
+                this.position.lng,
+                this.position.lat
+            );
+            // cicliamo sugli appartementi
+            this.apartments.forEach((apartment) => {
+                let llApartment = new tt.LngLat(
+                    apartment.longitude,
+                    apartment.latitude
                 );
-                // cicliamo sugli appartementi
-                this.apartments.forEach((apartment) => {
-                    let llApartment = new tt.LngLat(
-                        apartment.longitude,
-                        apartment.latitude
-                    );
-                    let distance = llSearching.distanceTo(llApartment);
-                    let distanceKm = distance / 1000;
+                let distance = llSearching.distanceTo(llApartment);
+                let distanceKm = distance / 1000;
 
-                    // restituiamo gli app entro i 20 km
-                    if (distanceKm <= this.km) {
-                        this.KmFilterApartment.push(apartment);
-                    }
-                });
-                console.log(this.KmFilterApartment);
-                // KmFilterApartment.forEach(apartment => {
-                //     //console.log(apartment.id);
-                //     this.apartment_services.forEach(element => {
-                //         //console.log(element);
-                //         if (apartment.id == element.id) {
-                //             this.filteredApartments.push(apartment);
-                //         }
-                //     });
-                // });
-                // console.log(this.filteredApartments);
+                // restituiamo gli app entro i 20 km
+                if (distanceKm <= this.km) {
+                    this.KmFilterApartment.push(apartment);
+                }
+            });
+            console.log("kmFilterApartment", this.KmFilterApartment);
         },
-
 
         validateSearch: function () {
             if (this.query && isNaN(this.query)) {
@@ -149,12 +155,25 @@ export default {
                 return false;
             }
         },
-        getCheckedServices: function() {
+        getCheckedServices: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
-            Axios.post(url, {services: this.checkedServices})
+            Axios.post(url, { services: this.checkedServices })
                 .then((result) => {
-                    console.log(result.data.results.data);
+                    // console.log(
+                    //     "result.data.results.data",
+                    //     result.data.results.data
+                    // );
                     this.apartment_services = result.data.results.data;
+                    this.KmFilterApartment.forEach((apartment) => {
+                        //console.log(apartment.id);
+                        this.apartment_services.forEach((element) => {
+                            //console.log(element);
+                            if (apartment.id == element.id) {
+                                this.filteredApartments.push(apartment);
+                            }
+                        });
+                    });
+                    console.log("filteredapartment", this.filteredApartments);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -201,6 +220,8 @@ export default {
                 this.position.lat = result.results[0].position.lat;
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
+                this.getKmApartments();
+                this.firstSearch = true;
             }
         },
         initializeMap(lng, lat) {
