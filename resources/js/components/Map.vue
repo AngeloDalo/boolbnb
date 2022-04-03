@@ -14,7 +14,7 @@
                 />
                 <p id="searchDemo"></p>
             </div>
-            <div v-if="firstSearch">
+            <div>
                 <div class="col-auto my-1">
                     <select
                         class="custom-select mr-sm-2"
@@ -24,6 +24,34 @@
                         <option value="20" selected>20Km</option>
                         <option value="40">40Km</option>
                         <option value="60">60Km</option>
+                    </select>
+                </div>
+                <div class="col-auto my-1">
+                    <label>Number of rooms</label>
+                    <select
+                        class="custom-select mr-sm-2"
+                        id="inlineFormCustomSelect"
+                        v-model="rooms"
+                    >
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5+</option>
+                    </select>
+                </div>
+                <div class="col-auto my-1">
+                    <label>Number of beds</label>
+                    <select
+                        class="custom-select mr-sm-2"
+                        id="inlineFormCustomSelect"
+                        v-model="beds"
+                    >
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5+</option>
                     </select>
                 </div>
                 <div
@@ -53,6 +81,20 @@
 
         <!-- mappa -->
         <div class="map" id="map" ref="mapRef"></div>
+
+        <div>
+            <h1>appartamenti</h1>
+            <div v-if="filteredApartments.length == 0">
+                <h2 v-for="apartment in KmFilterApartment" :key="apartment.id">
+                    {{ apartment.title }}
+                </h2>
+            </div>
+            <div v-else>
+                <h2 v-for="apartment in filteredApartments" :key="apartment.id">
+                    {{ apartment.title }}
+                </h2>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -76,8 +118,9 @@ export default {
             services: [],
             checkedServices: [],
             apartment_services: [],
-            firstSearch: false,
             km: 20,
+            rooms: 1,
+            beds: 1,
         };
     },
     created() {},
@@ -94,29 +137,17 @@ export default {
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
-                if (this.firstSearch) {
-                    this.filteredApartments = [];
-                    this.getCheckedServices();
-                    error.innerHTML = "";
-                    error.classList.remove("alert");
-                    error.classList.remove("alert-danger");
-                    tts.services
-                        .fuzzySearch({
-                            key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
-                            query: this.query,
-                        })
-                        .then(this.handleResults);
-                } else {
-                    error.innerHTML = "";
-                    error.classList.remove("alert");
-                    error.classList.remove("alert-danger");
-                    tts.services
-                        .fuzzySearch({
-                            key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
-                            query: this.query,
-                        })
-                        .then(this.handleResults);
-                }
+                this.filteredApartments = [];
+                this.getCheckedServices();
+                error.innerHTML = "";
+                error.classList.remove("alert");
+                error.classList.remove("alert-danger");
+                tts.services
+                    .fuzzySearch({
+                        key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
+                        query: this.query,
+                    })
+                    .then(this.handleResults);
             } else {
                 this.query = null;
                 message = "adress not valid";
@@ -139,13 +170,15 @@ export default {
                 );
                 let distance = llSearching.distanceTo(llApartment);
                 let distanceKm = distance / 1000;
-
                 // restituiamo gli app entro i 20 km
-                if (distanceKm <= this.km) {
+                if (
+                    distanceKm <= this.km &&
+                    apartment.rooms >= this.rooms &&
+                    apartment.beds >= this.beds
+                ) {
                     this.KmFilterApartment.push(apartment);
                 }
             });
-            console.log("kmFilterApartment", this.KmFilterApartment);
         },
 
         validateSearch: function () {
@@ -155,20 +188,19 @@ export default {
                 return false;
             }
         },
+
         getCheckedServices: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
             Axios.post(url, { services: this.checkedServices })
                 .then((result) => {
-                    // console.log(
-                    //     "result.data.results.data",
-                    //     result.data.results.data
-                    // );
                     this.apartment_services = result.data.results.data;
                     this.KmFilterApartment.forEach((apartment) => {
-                        //console.log(apartment.id);
                         this.apartment_services.forEach((element) => {
-                            //console.log(element);
-                            if (apartment.id == element.id) {
+                            if (
+                                apartment.id == element.id &&
+                                apartment.rooms >= this.rooms &&
+                                apartment.beds >= this.beds
+                            ) {
                                 this.filteredApartments.push(apartment);
                             }
                         });
@@ -179,6 +211,7 @@ export default {
                     console.log(error);
                 });
         },
+
         getServices: function () {
             const url = "http://127.0.0.1:8000/api/v1/services";
             Axios.get(url)
@@ -189,6 +222,7 @@ export default {
                     console.log(error);
                 });
         },
+
         getApartments: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments";
             Axios.get(url)
@@ -200,13 +234,8 @@ export default {
                             apartment.longitude,
                             apartment.latitude
                         );
-                        // var popup = new tt.Popup()
-                        //     .setLngLat(llApartment)
-                        //     .setHTML(`<h1>${apartment.title}</h1>`)
-                        //     .addTo(this.map);
                         var marker = new tt.Marker()
                             .setLngLat(llApartment)
-                            // .setPopup(popup)
                             .addTo(this.map);
                     });
                 })
@@ -221,7 +250,6 @@ export default {
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
                 this.getKmApartments();
-                this.firstSearch = true;
             }
         },
         initializeMap(lng, lat) {
