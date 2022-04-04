@@ -140,7 +140,7 @@ export default {
                 lat: 41.8933203,
             },
             apartment_services: [],
-            apartmentDistances: [],
+            // apartmentDistances: [],
             filteredApartments: [],
             services: [],
             checkedServices: [],
@@ -184,25 +184,25 @@ export default {
             }
         },
 
-        getKmApartments: function () {
-            let llSearching = new tt.LngLat(
-                this.position.lng,
-                this.position.lat
-            );
-            // cicliamo sugli appartementi
+        // getKmApartments: function () {
+        //     let llSearching = new tt.LngLat(
+        //         this.position.lng,
+        //         this.position.lat
+        //     );
+        //     // cicliamo sugli appartementi
 
-            this.apartment_services.forEach((apartment) => {
-                let llApartment = new tt.LngLat(
-                    apartment.longitude,
-                    apartment.latitude
-                );
-                let distance = llSearching.distanceTo(llApartment);
-                let distanceKm = distance / 1000;
+        //     this.apartment_services.forEach((apartment) => {
+        //         let llApartment = new tt.LngLat(
+        //             apartment.longitude,
+        //             apartment.latitude
+        //         );
+        //         let distance = llSearching.distanceTo(llApartment);
+        //         let distanceKm = distance / 1000;
 
-                this.apartmentDistances.push(distanceKm)
+        //         this.apartmentDistances.push(distanceKm)
 
-            });
-        },
+        //     });
+        // },
 
         validateSearch: function () {
             if (this.query && isNaN(this.query)) {
@@ -218,14 +218,15 @@ export default {
                 rooms: this.rooms,
                 beds: this.beds,
                 km: this.km,
-                apartmentDistances: this.apartmentDistances,
+                position: this.position,
+                // apartmentDistances: this.apartmentDistances,
             })
                 .then((result) => {
                     // console.log("checked services", this.checkedServices);
                     
                     // console.log(this.allDistances);
                     this.apartment_services = result.data.results.apartments;
-                    this.getKmApartments();
+                    // this.getKmApartments();
                     // this.distances = result.data.results.distances;
                     console.log("result", result.data.results);
                 })
@@ -251,7 +252,7 @@ export default {
                 this.position.lat = result.results[0].position.lat;
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
-                console.log('apdistance', this.apartmentDistances);
+                // console.log('apdistance', this.apartmentDistances);
                 console.log('log di handle result',result.results);
             }
         },

@@ -19,9 +19,10 @@ class ApartmentController extends Controller
         $data = $request->all();
 
         $KmRaggio = $data['km'];
-        $distances = $data['apartmentDistances'];
+        // $distances = $data['apartmentDistances'];
         $rooms = $data['rooms'];
         $beds = $data['beds'];
+        $position = $data['position'];
 
 
 
@@ -46,13 +47,14 @@ class ApartmentController extends Controller
         // }
         return response()->json([
             'response' => true,
-            'count' =>  $apartments->count(),
+            // 'count' =>  $apartments->count(),
             'results' =>  [
                 'apartments' => $apartments,
-                'distances' => $distances,
+                // 'distances' => $distances,
                 'rooms' => $rooms,
                 'beds' => $beds,
-                'raggioKm' => $KmRaggio,             
+                'raggioKm' => $KmRaggio,
+                'position' => $position,             
             ],
         ]);
     }
