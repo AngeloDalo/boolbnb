@@ -120,7 +120,7 @@
                 <div v-else>
                     <div class="row mb-5 border border-danger" v-for="apartment in filteredApartments" :key="apartment.id"> 
                         <div class="col-6">
-                            <img :src="apartment.image" :alt="apartment.title">
+                            <img class="w-100" :src="'storage/' + apartment.image" :alt="apartment.title">
                         </div>
                         <div class="col-6">
                             <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
