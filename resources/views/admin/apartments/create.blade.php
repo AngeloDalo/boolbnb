@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container p-5">
+    <div class="container border border-danger rounded-3 p-3 mb-4">
         <div class="row">
             @if (session('status'))
                 <div class="alert alert-danger">
@@ -11,7 +11,6 @@
         </div>
         <div class="row">
             <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data" id="MyForm">
-                <a class="btn btn-primary" href="{{ url()->previous() }}">CANCEL</a>
                 @csrf
                 @method('POST')
 
@@ -144,7 +143,7 @@
                 </div>
 
 
-                <button type="button" class="btn btn-primary" onclick="validationForm()" value="Submit form">Save</button>
+                <button type="button" class="btn btn-danger" onclick="validationForm()" value="Submit form">Save</button>
             </form>
         </div>
     </div>
