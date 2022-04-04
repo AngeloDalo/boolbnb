@@ -20,9 +20,9 @@
                 <h3>Bathrooms: {{ $apartment->bathrooms }}</h3>
                 <h3>Services:</h3>
                 @foreach ($apartment->services()->get() as $service)
-                <span class="badge rounded-pill bg-secondary">
-                    {{ $service->name }}
-                </span>
+                    <span class="badge rounded-pill bg-secondary">
+                        {{ $service->name }}
+                    </span>
                 @endforeach
                 <h3>Square: {{ $apartment->square }}m<sup>3</sup></h3>
                 <h3>{{ $apartment->address }}</h3>
