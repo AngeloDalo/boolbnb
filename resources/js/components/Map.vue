@@ -140,7 +140,7 @@ export default {
                 lat: 41.8933203,
             },
             apartment_services: [],
-            // apartmentDistances: [],
+            apartmentDistance: [],
             filteredApartments: [],
             services: [],
             checkedServices: [],
@@ -227,8 +227,8 @@ export default {
                     // console.log(this.allDistances);
                     this.apartment_services = result.data.results.apartments;
                     // this.getKmApartments();
-                    // this.distances = result.data.results.distances;
-                    console.log("result", result.data.results);
+                    this.apartmentDistance = result.data.results.distance;
+                    console.log("result", result.data.results.distance);
                 })
                 .catch((error) => {
                     console.log(error);
