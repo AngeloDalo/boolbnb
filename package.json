@@ -27,6 +27,7 @@
     "dependencies": {
         "@tomtom-international/web-sdk-maps": "^6.18.0",
         "@tomtom-international/web-sdk-services": "^6.18.0",
-        "bootstrap-icons": "^1.8.1"
+        "bootstrap-icons": "^1.8.1",
+        "vue-router": "^3.5.3"
     }
 }

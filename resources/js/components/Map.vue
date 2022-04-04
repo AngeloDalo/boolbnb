@@ -105,7 +105,7 @@
                 <div v-if="filteredApartments.length == 0">
                     <div class="row mb-5 border border-danger" v-for="apartment in KmFilterApartment" :key="apartment.id">
                         <div class="col-6">
-                            <img :src="apartment.image" :alt="apartment.title">
+                            <img class="w-100" :src="'storage/' + apartment.image" :alt="apartment.title">
                         </div>
                         <div class="col-6">
                             <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
@@ -113,7 +113,7 @@
                             <p>Rooms: {{ apartment.rooms }}</p>
                             <p>Bed: {{ apartment.beds }}</p>
                             <p>Square: {{ apartment.square }}</p>
-                            <button type="button" class="btn btn-danger mb-2">View</button>
+                            <router-link class="btn btn-danger mb-2" :to="{ name: 'apartment', params: { id: apartment.id } }"> View </router-link>
                         </div> 
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                             <p>Rooms: {{ apartment.rooms }}</p>
                             <p>Bed: {{ apartment.beds }}</p>
                             <p>Square: {{ apartment.square }}</p>
-                            <button type="button" class="btn btn-danger mb-2">View</button>
+                            <router-link class="btn btn-danger mb-2" :to="{ name: 'apartment', params: { id: apartment.id } }"> View </router-link>
                         </div> 
                     </div>
                 </div>

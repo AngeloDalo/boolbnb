@@ -45,4 +45,16 @@ class ApartmentController extends Controller
                 'data' => $apartments
             ],
         ]);
-}}
+    }
+    public function show($id)
+    {
+        $apartment = Apartment::find($id);
+        return response()->json([
+            'response' => true,
+            'count' => $apartment ? 1 : 0,
+            'results' =>  [
+                'data' => $apartment
+            ],
+        ]);
+    }
+}
