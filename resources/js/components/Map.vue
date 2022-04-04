@@ -17,7 +17,7 @@
                 <p id="searchDemo"></p>
                 <button
                     type="button"
-                    class="btn btn-danger"
+                    class="btn btn-danger btn-search"
                     @click="search()"
                     value="Submit form"
                 >
@@ -99,27 +99,41 @@
         </div>
 
         <!-- mappa -->
-        <div class="d-flex justify-content-between p-3">
-            <div>
-                <h1>appartamenti</h1>
+        <h1 class="font-weight-bold text-uppercase text-danger">apartments</h1>
+        <div class="row p-3">
+            <div class="col-6 me-1">
                 <div v-if="filteredApartments.length == 0">
-                    <h2
-                        v-for="apartment in KmFilterApartment"
-                        :key="apartment.id"
-                    >
-                        {{ apartment.title }}
-                    </h2>
+                    <div class="row mb-5 border border-danger" v-for="apartment in KmFilterApartment" :key="apartment.id">
+                        <div class="col-6">
+                            <img :src="apartment.image" :alt="apartment.title">
+                        </div>
+                        <div class="col-6">
+                            <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
+                            <p>Prirce: {{ apartment.price }}</p>
+                            <p>Rooms: {{ apartment.rooms }}</p>
+                            <p>Bed: {{ apartment.beds }}</p>
+                            <p>Square: {{ apartment.square }}</p>
+                            <button type="button" class="btn btn-danger mb-2">View</button>
+                        </div> 
+                    </div>
                 </div>
                 <div v-else>
-                    <h2
-                        v-for="apartment in filteredApartments"
-                        :key="apartment.id"
-                    >
-                        {{ apartment.title }}
-                    </h2>
+                    <div class="row mb-5 border border-danger" v-for="apartment in filteredApartments" :key="apartment.id"> 
+                        <div class="col-6">
+                            <img :src="apartment.image" :alt="apartment.title">
+                        </div>
+                        <div class="col-6">
+                            <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
+                            <p>Prirce: {{ apartment.price }}</p>
+                            <p>Rooms: {{ apartment.rooms }}</p>
+                            <p>Bed: {{ apartment.beds }}</p>
+                            <p>Square: {{ apartment.square }}</p>
+                            <button type="button" class="btn btn-danger mb-2">View</button>
+                        </div> 
+                    </div>
                 </div>
             </div>
-            <div class="map" id="map" ref="mapRef"></div>
+            <div class="map col-2" id="map" ref="mapRef"></div>
         </div>
     </div>
 </template>
@@ -323,7 +337,7 @@ export default {
 div.form-outline {
     width: 60%;
 }
-button {
+.btn-search {
     width: 10%;
 }
 #form1 {
