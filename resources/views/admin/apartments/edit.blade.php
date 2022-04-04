@@ -8,12 +8,10 @@
             </div>
         @endif
     </div>
-    <div class="container p-5">
+    <div class="container border border-danger rounded-3 p-3 mb-4">
         <div class="row">
             <div class="col">
-                <h2 class="text-uppercase">Edit apartment: {{ $apartment->title }}</h2>
-                <a class="btn btn-primary" href="{{ route('admin.apartments.index') }}">HOME</a>
-                <a class="btn btn-primary" href="{{ route('admin.apartments.show', $apartment) }}">VIEW</a>
+                <h2 class="text-uppercase"><span class="text-danger">Edit apartment:</span> {{ $apartment->title }}</h2>
             </div>
         </div>
         <div class="row">
@@ -35,7 +33,7 @@
 
                         @if (!empty($apartment->image))
                             <div class="mb-3">
-                                <img class="img-fluid" src="{{ asset('storage/' . $apartment->image) }}"
+                                <img class="img-fluid w-50 rounded-3" src="{{ asset('storage/' . $apartment->image) }}"
                                     alt="{{ $apartment->title }}">
                             </div>
                         @endif

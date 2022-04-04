@@ -35,25 +35,25 @@
                             <ul class="nav nav-pills flex-column mb-auto">
                                 <li class="nav-item">
                                     <a href="{{ url('/') }}" class="nav-link text-danger" aria-current="page">
-                                        <i class="bi bi-house"></i>
+                                        <i class="bi bi-house" style="color:#03306D"></i>
                                         Home
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="nav-link text-danger">
-                                        <i class="bi bi-bar-chart-line"></i>
+                                        <i class="bi bi-bar-chart-line" style="color:#03306D"></i>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.apartments.index') }}" class="nav-link text-danger">
-                                        <i class="bi bi-grid"></i>
+                                        <i class="bi bi-grid" style="color:#03306D"></i>
                                         My apartment
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.apartments.create') }}" class="nav-link text-danger">
-                                        <i class="bi bi-plus-square"></i>
+                                        <i class="bi bi-plus-square" style="color:#03306D"></i>
                                         Create apartment
                                     </a>
                                 </li>
@@ -66,7 +66,7 @@
                                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ asset('img/logoBoolBnb.png') }}" alt="" width="32" height="32"
                                         class="rounded-circle me-2">
-                                    <strong>{{ Auth::user()->name }}</strong>
+                                    <strong style="color:#03306D">{{ Auth::user()->name }}</strong>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
                                     aria-labelledby="dropdownUser1">

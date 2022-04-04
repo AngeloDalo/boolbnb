@@ -12,11 +12,11 @@
 
 
         <div class="row border border-danger rounded-3 p-3">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-12 col-lg-6">
                 <img class="w-100 h-100 rounded-3" src="{{ asset('storage/' . $apartment->image) }}"
                     alt="{{ $apartment->title }}">
             </div>
-            <div class="col-sm- 12 col-md-6">
+            <div class="col-sm- 12 col-md-12 col-lg-6">
                 <div class="d-flex flex-column">
                     <h3 class="card-title text-danger">{{ $apartment->title }}</h3>
                     <span>Price: {{ $apartment->price }}&euro;</span>
