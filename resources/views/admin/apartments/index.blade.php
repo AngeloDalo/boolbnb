@@ -17,9 +17,9 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-primary">
+                <table class="table">
                     <thead>
-                        <tr class="table-primary">
+                        <tr class="table-danger">
                             <th>Title</th>
                             <th>Address</th>
                             <th>Price</th>
@@ -37,10 +37,10 @@
                                 <td>{{ $apartment->price }}&euro;</td>
                                 <td>{{ $apartment->created_at }}</td>
                                 <td>{{ $apartment->updated_at }}</td>
-                                <td><a class="btn btn-primary"
+                                <td><a class="btn btn-danger"
                                         href="{{ route('admin.apartments.show', $apartment->slug) }}">View</a></td>
                                 <td>
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-danger"
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Update</a>
                                 </td>
                             </tr>

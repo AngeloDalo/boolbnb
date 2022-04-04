@@ -29,29 +29,30 @@
         <main>
             <div class="container-fluid mt-5">
                 <div class='row'>
-                    <nav id='sidebarMenu' class='col-2 d-md-block bg-light sidebar collapse me-5'>
-                        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+                    <nav id='sidebarMenu'
+                        class='col-sm-12 col-md-12 col-lg-2 d-md-block bg-light sidebar collapse me-5'>
+                        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light border border-danger rounded-3">
                             <ul class="nav nav-pills flex-column mb-auto">
                                 <li class="nav-item">
-                                    <a href="{{ url('/') }}" class="nav-link active" aria-current="page">
+                                    <a href="{{ url('/') }}" class="nav-link text-danger" aria-current="page">
                                         <i class="bi bi-house"></i>
                                         Home
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link text-danger">
                                         <i class="bi bi-bar-chart-line"></i>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.apartments.index') }}" class="nav-link">
+                                    <a href="{{ route('admin.apartments.index') }}" class="nav-link text-danger">
                                         <i class="bi bi-grid"></i>
                                         My apartment
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.apartments.create') }}" class="nav-link">
+                                    <a href="{{ route('admin.apartments.create') }}" class="nav-link text-danger">
                                         <i class="bi bi-plus-square"></i>
                                         Create apartment
                                     </a>
@@ -60,9 +61,10 @@
                             </ul>
                             <hr>
                             <div class="dropdown">
-                                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                                <a href="#"
+                                    class="d-flex align-items-center text-decoration-none dropdown-toggle text-danger"
                                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                    <img src="{{ asset('img/logoBoolBnb.png') }}" alt="" width="32" height="32"
                                         class="rounded-circle me-2">
                                     <strong>{{ Auth::user()->name }}</strong>
                                 </a>
