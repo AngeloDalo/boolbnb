@@ -13,16 +13,17 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::orderBy('created_at', 'desc')->get();
-
-        return response()->json([
-            'response' => true,
-            'results' => $apartments,
-        ]);
     }
     public function search(Request $request)
     {
         $data = $request->all();
+
+        $KmRaggio = $data['km'];
+        $distances = $data['apartmentDistances'];
+        $rooms = $data['rooms'];
+        $beds = $data['beds'];
+
+
 
         //aperta chiamata ma non chiusa per avere continui aggiornamenti
         $apartments = Apartment::where('id', '>=', 1);
@@ -36,13 +37,23 @@ class ApartmentController extends Controller
             }
         }
 
+
         $apartments = $apartments->with(['services'])->get();
 
+        // $testArray = [];
+        // foreach ($apartments as $key => $apartment) {
+        //     echo "{$key} => {$apartment}";
+        // }
         return response()->json([
             'response' => true,
             'count' =>  $apartments->count(),
             'results' =>  [
-                'data' => $apartments
+                'apartments' => $apartments,
+                'distances' => $distances,
+                'rooms' => $rooms,
+                'beds' => $beds,
+                'raggioKm' => $KmRaggio,             
             ],
         ]);
-}}
+    }
+}

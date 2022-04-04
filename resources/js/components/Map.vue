@@ -104,7 +104,7 @@
                 <h1>appartamenti</h1>
                 <div v-if="filteredApartments.length == 0">
                     <h2
-                        v-for="apartment in KmFilterApartment"
+                        v-for="apartment in apartment_services"
                         :key="apartment.id"
                     >
                         {{ apartment.title }}
@@ -112,7 +112,7 @@
                 </div>
                 <div v-else>
                     <h2
-                        v-for="apartment in filteredApartments"
+                        v-for="apartment in apartment_services"
                         :key="apartment.id"
                     >
                         {{ apartment.title }}
@@ -139,13 +139,11 @@ export default {
                 lng: 12.4829321,
                 lat: 41.8933203,
             },
-            apartments: [],
-            KmFilterApartment: [],
-            allDistances: [],
+            apartment_services: [],
+            apartmentDistances: [],
             filteredApartments: [],
             services: [],
             checkedServices: [],
-            apartment_services: [],
             km: 20,
             rooms: 1,
             beds: 1,
@@ -154,14 +152,15 @@ export default {
     created() {},
     mounted() {
         this.initializeMap(this.position.lng, this.position.lat);
-        this.getApartments();
+        // this.getApartments();
         this.getServices();
     },
     methods: {
         search: function () {
-            this.KmFilterApartment = [];
+            // this.KmFilterApartment = [];
             this.apartment_services = [];
-
+            // this.allDistances = [];
+            // console.log(this.distances);
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
@@ -191,8 +190,8 @@ export default {
                 this.position.lat
             );
             // cicliamo sugli appartementi
-            let counter = 0;
-            this.apartments.forEach((apartment) => {
+
+            this.apartment_services.forEach((apartment) => {
                 let llApartment = new tt.LngLat(
                     apartment.longitude,
                     apartment.latitude
@@ -200,28 +199,9 @@ export default {
                 let distance = llSearching.distanceTo(llApartment);
                 let distanceKm = distance / 1000;
 
-                // restituiamo gli app entro i 20 km
-                if (
-                    distanceKm <= this.km &&
-                    apartment.rooms >= this.rooms &&
-                    apartment.beds >= this.beds
-                ) {
-                    counter += 1;
-                    this.allDistances.push(distanceKm);
-                    this.KmFilterApartment.push(apartment);
-                    console.log(this.KmFilterApartment);
-                }
+                this.apartmentDistances.push(distanceKm)
+
             });
-            for (let i = 0; i < counter; i++) {
-                for (let j = 0; j < counter; j++) {
-                    if (this.allDistances[j] > this.allDistances[j + 1]) {
-                        let temp = this.KmFilterApartment[j];
-                        this.KmFilterApartment[j] =
-                            this.KmFilterApartment[j + 1];
-                        this.KmFilterApartment[j + 1] = temp;
-                    }
-                }
-            }
         },
 
         validateSearch: function () {
@@ -234,21 +214,20 @@ export default {
 
         getCheckedServices: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
-            Axios.post(url, { services: this.checkedServices })
+            Axios.post(url, {
+                rooms: this.rooms,
+                beds: this.beds,
+                km: this.km,
+                apartmentDistances: this.apartmentDistances,
+            })
                 .then((result) => {
-                    this.apartment_services = result.data.results.data;
-                    this.KmFilterApartment.forEach((apartment) => {
-                        this.apartment_services.forEach((element) => {
-                            if (
-                                apartment.id == element.id &&
-                                apartment.rooms >= this.rooms &&
-                                apartment.beds >= this.beds
-                            ) {
-                                this.filteredApartments.push(apartment);
-                            }
-                        });
-                    });
-                    console.log("filteredapartment", this.filteredApartments);
+                    // console.log("checked services", this.checkedServices);
+                    
+                    // console.log(this.allDistances);
+                    this.apartment_services = result.data.results.apartments;
+                    this.getKmApartments();
+                    // this.distances = result.data.results.distances;
+                    console.log("result", result.data.results);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -266,33 +245,14 @@ export default {
                 });
         },
 
-        getApartments: function () {
-            const url = "http://127.0.0.1:8000/api/v1/apartments";
-            Axios.get(url)
-                .then((result) => {
-                    this.apartments = result.data.results;
-                    // cicliamo sugli app per avere i marker
-                    this.apartments.forEach((apartment) => {
-                        let llApartment = new tt.LngLat(
-                            apartment.longitude,
-                            apartment.latitude
-                        );
-                        var marker = new tt.Marker()
-                            .setLngLat(llApartment)
-                            .addTo(this.map);
-                    });
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         handleResults: function (result) {
             if (result.results) {
                 this.position.lng = result.results[0].position.lng;
                 this.position.lat = result.results[0].position.lat;
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
-                this.getKmApartments();
+                console.log('apdistance', this.apartmentDistances);
+                console.log('log di handle result',result.results);
             }
         },
         initializeMap(lng, lat) {
