@@ -17,7 +17,7 @@
                 <p id="searchDemo"></p>
                 <button
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-danger"
                     @click="search()"
                     value="Submit form"
                 >
@@ -67,9 +67,19 @@
                             <option value="5">5+</option>
                         </select>
                     </div>
+                    <button
+                        type="button"
+                        class="btn btn-outline-danger"
+                        @click="viewServices = !viewServices"
+                    >
+                        <i class="bi bi-filter-circle"></i> Filter
+                    </button>
                 </div>
 
-                <div class="d-flex row">
+                <div
+                    class="d-flex row"
+                    :class="viewServices == false ? 'invisible' : 'visible'"
+                >
                     <div
                         class="form-check col-3"
                         v-for="(service, index) in services"
@@ -122,6 +132,7 @@ export default {
     name: "Map",
     data() {
         return {
+            viewServices: false,
             map: null,
             query: null,
             position: {
@@ -317,5 +328,13 @@ button {
 }
 #form1 {
     width: 100%;
+}
+
+.invisible {
+    display: none;
+}
+
+.visible {
+    display: block;
 }
 </style>
