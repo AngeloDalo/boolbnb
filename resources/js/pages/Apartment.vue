@@ -11,9 +11,7 @@
             <p>Bed: {{ apartment.beds }}</p>
             <p>Square: {{ apartment.square }}</p>
             <p>Address: {{ apartment.address }}</p>
-            <p>Longitude: {{ apartment.longitude }}</p>
-            <p>Latitude: {{ apartment.latitude }}</p>
-            <router-link class="btn btn-danger mb-2" :to="{ name: 'contact', params: { id: apartment.id }}"> {{ apartment.id }} </router-link>
+            <router-link class="btn btn-danger mb-2 text-white" :to="{ name: 'contact', params: { id: apartment.id }}"> <span class="routerApartment d-none">{{ apartment.id }}</span>Contact Owner</router-link>
         </div>
     </div>
     <div class="map" id="map" ref="mapRef"></div>
@@ -22,6 +20,7 @@
 
 <script>
 import tt from "@tomtom-international/web-sdk-maps";
+import tts from "@tomtom-international/web-sdk-services";
 import Axios from "axios";
   export default {
     name: 'Apartment',
@@ -29,20 +28,21 @@ import Axios from "axios";
     data() {
         return {
             map: null,
-            apartment: null
+            apartment: null,
         }
     },
     created() {
         const url = 'http://127.0.0.1:8000/api/v1/apartments/' + this.id;
         this.getApartment(url);
-        console.log(url);
+    },
+    mounted() {
+        this.initializeMap(17.277969, 40.4657082);
     },
     methods: {
         getApartment(url){
             Axios.get(url).then(
                 (result) => {
                 this.apartment = result.data.results.data;
-                this.initializeMap(this.apartment.longitude, this.apartment.latitude);
             }).catch(error => console.log(error));
         },
         initializeMap(lng, lat) {

@@ -19,7 +19,7 @@
         //percorso per il logo da nettere nella navbar
         menuItems: [
                 {
-                    label: 'Cerca Appartamento',
+                    label: 'Search Apartment',
                     routeName: 'map'
                 },
             ],
