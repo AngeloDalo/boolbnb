@@ -41,7 +41,7 @@ class ApartmentController extends Controller
         }
 
 
-        $apartments = $apartments->with(['services'])->get();
+        $apartments = $apartments->with(['services'])->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
 
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
@@ -71,7 +71,7 @@ class ApartmentController extends Controller
                 'searchedLng' => $searchedLng,
                 'apartmentLat' => $apartmentLat,
                 'apartmentLng' => $apartmentLng, 
-                'distance' => $apartmentDistance          
+                'distance' => $apartmentDistance,       
             ],
         ]);
     }

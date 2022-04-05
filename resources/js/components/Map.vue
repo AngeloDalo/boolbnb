@@ -102,12 +102,9 @@
         <div class="d-flex justify-content-between p-3">
             <div>
                 <h1>appartamenti</h1>
-                <div v-if="filteredApartments.length == 0">
-                    <h2
-                        v-for="apartment in apartment_services"
-                        :key="apartment.id"
-                    >
-                        {{ apartment.title }}
+                <div v-if="apartment_services.length == 0">
+                    <h2>
+                        Search Not Found
                     </h2>
                 </div>
                 <div v-else>
@@ -141,7 +138,6 @@ export default {
             },
             apartment_services: [],
             apartmentDistance: [],
-            filteredApartments: [],
             services: [],
             checkedServices: [],
             km: 20,
@@ -165,7 +161,6 @@ export default {
             let message = "";
             if (this.validateSearch()) {
                 this.filteredApartments = [];
-                this.getCheckedServices();
                 error.innerHTML = "";
                 error.classList.remove("alert");
                 error.classList.remove("alert-danger");
@@ -184,26 +179,6 @@ export default {
             }
         },
 
-        // getKmApartments: function () {
-        //     let llSearching = new tt.LngLat(
-        //         this.position.lng,
-        //         this.position.lat
-        //     );
-        //     // cicliamo sugli appartementi
-
-        //     this.apartment_services.forEach((apartment) => {
-        //         let llApartment = new tt.LngLat(
-        //             apartment.longitude,
-        //             apartment.latitude
-        //         );
-        //         let distance = llSearching.distanceTo(llApartment);
-        //         let distanceKm = distance / 1000;
-
-        //         this.apartmentDistances.push(distanceKm)
-
-        //     });
-        // },
-
         validateSearch: function () {
             if (this.query && isNaN(this.query)) {
                 return true;
@@ -212,7 +187,7 @@ export default {
             }
         },
 
-        getCheckedServices: function () {
+        gtApartment: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
             Axios.post(url, {
                 rooms: this.rooms,
@@ -252,7 +227,7 @@ export default {
                 this.position.lat = result.results[0].position.lat;
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
-                // console.log('apdistance', this.apartmentDistances);
+                this.gtApartment();
                 console.log('log di handle result',result.results);
             }
         },
