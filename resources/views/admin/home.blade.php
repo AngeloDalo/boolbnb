@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center border border-danger rounded-3">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,7 +14,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                    <a href="{{ url('/admin/apartments') }}" class="btn btn-primary">View Apartment</a>
+                    <br>
+                    <a href="{{ url('/admin/apartments') }}" class="btn btn-outline-danger">View My Apartment</a>
                 </div>
             </div>
         </div>
