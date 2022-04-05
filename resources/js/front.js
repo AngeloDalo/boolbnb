@@ -14,7 +14,7 @@ const router = new VueRouter({
     mode: 'history',
     routes:  [
             {
-                path: '/apartments',
+                path: '/',
                 name: 'map',
                 component: Map
             },

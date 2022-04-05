@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Prophecy\Call\Call;
+use App\Message;
 
 class ApartmentController extends Controller
 {
@@ -81,11 +82,13 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $messages = Message::where('apartment_id', '=', $apartment->id)->get();
+        //var_dump($messages);
         // $services = Service::where();
         if (Auth::user()->id != $apartment->user_id) {
             return redirect()->route('admin.apartments.index');
         }
-        return view('admin.apartments.show', ['apartment' => $apartment]);
+        return view('admin.apartments.show', ['apartment' => $apartment, 'messages' => $messages]);
     }
 
     /**

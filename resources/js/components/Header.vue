@@ -1,10 +1,10 @@
 <!-- navbar sotto nav login -->
 <template>
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-<div class="container">
+<div class="container d-flex justify-content-center">
     <nav class="navbar navbar-light bg-light">
-        <form class="container-fluid justify-content-start">
-            <button class="btn btn-outline-success" type="button" v-for="(item) in menuItems" :key="item.id"><router-link class="nav-link" :to="{ name: item.routeName}">{{ item.label }}</router-link></button>
+        <form class="container-fluid">
+            <button class="btn btn-danger" type="button" v-for="(item) in menuItems" :key="item.id"><router-link class="nav-link text-light" :to="{ name: item.routeName}">{{ item.label }}</router-link></button>
         </form>
     </nav>
 </div>
