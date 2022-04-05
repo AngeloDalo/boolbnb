@@ -26,6 +26,9 @@ class ApartmentController extends Controller
         $searchedLng = $position['lng'];
         $apartmentDistance = [];
         $checkedServices = $data['checkedServices'];
+        $servicesApartment = [];
+        // $apartmanteServices = $data['services'];
+        // $apartments = Apartment::with('services')->get();
 
 
 
@@ -33,30 +36,32 @@ class ApartmentController extends Controller
         $apartments = Apartment::where('id', '>=', 1);
 
 
-        $apartments = $apartments->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
+        $apartments = $apartments->where('visible', '=', 1)->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
 
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
             $apartmentLng = floatval($apartment->longitude);
             $distance = distance($searchedLat, $searchedLng, $apartmentLat, $apartmentLng);
-            $services = $apartment->services;
+            $services = [$apartment->services];
+            $servicesApartment = $services;
+            // if (!isset($checkedServices) && $checkedServices !== $servicesApartment) {
+            //     $test = $apartments;
+            // }
             if ($distance > $KmRaggio) {
                 $apartments->forget($key);
             } else {
                 array_push($apartmentDistance, $distance);
+                // $apartments = $apartments->where(in_array([$checkedServices], $servicesApartment))->get();
             }
-        //     if (in_array($checkedServices, $services)) {
-        //         var_dump('testing');
-        //     }
         }
 
-        
+
         return response()->json([
             'response' => true,
-            // 'count' =>  $apartments->count(),
+            'count' =>  $apartments->count(),
             'results' =>  [
                 'apartments' => $apartments,
-                // 'distances' => $distances,
+                // 'distances' => $apartmentDistance,
                 // 'rooms' => $rooms,
                 // 'beds' => $beds,
                 // 'raggioKm' => $KmRaggio,
@@ -66,10 +71,11 @@ class ApartmentController extends Controller
                 // 'apartmentLat' => $apartmentLat,
                 // 'apartmentLng' => $apartmentLng, 
                 // 'distance' => $apartmentDistance,
-                'services' => $services,
+                'services' => $servicesApartment,
                 'checked' => $checkedServices,
+                'testApp' => $apartments,
                 // 'filteredAPp' => $filteredApartments 
-                    
+
             ],
         ]);
     }
@@ -86,8 +92,6 @@ function distance($lat1, $lon1, $lat2, $lon2)
     $lonDelta = $lonTo - $lonFrom;
 
     $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
-    cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
     return $angle * $r;
-
-    
 }

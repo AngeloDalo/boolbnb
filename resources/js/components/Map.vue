@@ -198,8 +198,9 @@ export default {
             })
                 .then((result) => {
                     this.apartment_services = result.data.results.apartments;
-                    this.apartmentDistance = result.data.results.distance;
-                    console.log("result", result.data.results.apartments);
+                    this.apartmentDistance = result.data.results.distances;
+                    // console.log("result", result.data.results.distances);
+                    console.log(result.data.results.checked);
                     console.log(result.data.results);
                 })
                 .catch((error) => {
