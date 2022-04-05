@@ -32,25 +32,14 @@ class ApartmentController extends Controller
         //aperta chiamata ma non chiusa per avere continui aggiornamenti
         $apartments = Apartment::where('id', '>=', 1);
 
-        //Se esistono i services all'interno di data passati tramite request
-        if (array_key_exists('services', $data)) {
-            foreach ($data['services'] as $service) {
-                $apartments->whereHas('services', function (Builder $query) use ($service) {
-                    $query->where('name', '=', $service);
-                    
-                });
-            }
-        }
 
-
-        $apartments = $apartments->with(['services'])->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
+        $apartments = $apartments->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
 
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
             $apartmentLng = floatval($apartment->longitude);
             $distance = distance($searchedLat, $searchedLng, $apartmentLat, $apartmentLng);
             $services = $apartment->services;
-            
             if ($distance > $KmRaggio) {
                 $apartments->forget($key);
             } else {
@@ -61,7 +50,6 @@ class ApartmentController extends Controller
         //     }
         }
 
-        // formula matematica per il calcolo della distanza in km tra due punti identificati dalle coordinate latitudine e longitudine
         
         return response()->json([
             'response' => true,
@@ -69,17 +57,18 @@ class ApartmentController extends Controller
             'results' =>  [
                 'apartments' => $apartments,
                 // 'distances' => $distances,
-                'rooms' => $rooms,
-                'beds' => $beds,
-                'raggioKm' => $KmRaggio,
-                'position' => $position,
-                'searchedLat' => $searchedLat,
-                'searchedLng' => $searchedLng,
-                'apartmentLat' => $apartmentLat,
-                'apartmentLng' => $apartmentLng, 
-                'distance' => $apartmentDistance,
+                // 'rooms' => $rooms,
+                // 'beds' => $beds,
+                // 'raggioKm' => $KmRaggio,
+                // 'position' => $position,
+                // 'searchedLat' => $searchedLat,
+                // 'searchedLng' => $searchedLng,
+                // 'apartmentLat' => $apartmentLat,
+                // 'apartmentLng' => $apartmentLng, 
+                // 'distance' => $apartmentDistance,
                 'services' => $services,
-                'checked' => $checkedServices 
+                'checked' => $checkedServices,
+                // 'filteredAPp' => $filteredApartments 
                     
             ],
         ]);
