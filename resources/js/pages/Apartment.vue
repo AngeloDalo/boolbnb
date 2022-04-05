@@ -12,7 +12,7 @@
                 <p>Address: {{ apartment.address }}</p>
                 <p>Longitude: {{ apartment.longitude }}</p>
                 <p>Latitude: {{ apartment.latitude }}</p>
-                <router-link class="btn btn-danger mb-2" :to="{ name: 'contacts', params: { id: apartment.id } }"> Contact </router-link>
+                <router-link class="btn btn-danger mb-2" :to="{ name: 'contact', params: { id: apartment.id }}"> {{ apartment.id }} </router-link>
           </div>
         </div>
         <div class="map col-3" id="map" ref="mapRef"></div>

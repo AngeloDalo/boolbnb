@@ -26,7 +26,7 @@ const router = new VueRouter({
             },
             {
                 path: '/contatcs',
-                name: 'contacr',
+                name: 'contact',
                 component: Contact
             },
         ]
