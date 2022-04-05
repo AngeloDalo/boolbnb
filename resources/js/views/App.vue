@@ -1,16 +1,16 @@
 <template>
     <div>
-        <Map/>
+        <Header></Header>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-import Map from "../components/Map.vue";
+import Header from "../components/Header.vue";
 export default {
     name: "App",
     components: {
-        Map,
+        Header,
     },
 };
 </script>

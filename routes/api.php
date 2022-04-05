@@ -24,3 +24,4 @@ Route::get('/v1/apartments', 'Api\ApartmentController@index');
 Route::get('/v1/apartments/{id}', 'Api\ApartmentController@show');
 Route::get('/v1/services', 'Api\ServiceController@index');
 Route::post('/v1/apartments/search', 'Api\ApartmentController@search'); 
+Route::post('v1/contacts', 'Api\ContactController@sendMessage');
