@@ -105,7 +105,7 @@
   
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="https://marive.it/wp-content/uploads/2020/01/tour-2.jpg"
+          <img src="https://wallpaperaccess.com/full/411099.jpg"
             alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
         </div>
       </div>
