@@ -25,6 +25,7 @@ class ApartmentController extends Controller
         $searchedLat = $position['lat'];
         $searchedLng = $position['lng'];
         $apartmentDistance = [];
+        $checkedServices = $data['checkedServices'];
 
 
 
@@ -36,6 +37,7 @@ class ApartmentController extends Controller
             foreach ($data['services'] as $service) {
                 $apartments->whereHas('services', function (Builder $query) use ($service) {
                     $query->where('name', '=', $service);
+                    
                 });
             }
         }
@@ -46,13 +48,17 @@ class ApartmentController extends Controller
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
             $apartmentLng = floatval($apartment->longitude);
-            
             $distance = distance($searchedLat, $searchedLng, $apartmentLat, $apartmentLng);
+            $services = $apartment->services;
+            
             if ($distance > $KmRaggio) {
                 $apartments->forget($key);
             } else {
                 array_push($apartmentDistance, $distance);
             }
+        //     if (in_array($checkedServices, $services)) {
+        //         var_dump('testing');
+        //     }
         }
 
         // formula matematica per il calcolo della distanza in km tra due punti identificati dalle coordinate latitudine e longitudine
@@ -71,7 +77,10 @@ class ApartmentController extends Controller
                 'searchedLng' => $searchedLng,
                 'apartmentLat' => $apartmentLat,
                 'apartmentLng' => $apartmentLng, 
-                'distance' => $apartmentDistance,       
+                'distance' => $apartmentDistance,
+                'services' => $services,
+                'checked' => $checkedServices 
+                    
             ],
         ]);
     }

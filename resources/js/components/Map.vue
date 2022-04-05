@@ -194,19 +194,16 @@ export default {
                 beds: this.beds,
                 km: this.km,
                 position: this.position,
-                // apartmentDistances: this.apartmentDistances,
+                checkedServices: this.checkedServices
             })
                 .then((result) => {
-                    // console.log("checked services", this.checkedServices);
-                    
-                    // console.log(this.allDistances);
                     this.apartment_services = result.data.results.apartments;
-                    // this.getKmApartments();
                     this.apartmentDistance = result.data.results.distance;
-                    console.log("result", result.data.results.distance);
+                    console.log("result", result.data.results.apartments);
+                    console.log(result.data.results);
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error.response.data);
                 });
         },
 
@@ -228,7 +225,7 @@ export default {
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
                 this.gtApartment();
-                console.log('log di handle result',result.results);
+                // console.log('log di handle result',result.results);
             }
         },
         initializeMap(lng, lat) {
