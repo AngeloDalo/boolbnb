@@ -41,9 +41,9 @@
         <a class="btn btn-danger mt-5" href="{{ route('admin.payment.index', $apartment) }}">Sponsorship</a>
 
         <div class="mt-5">
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
-                    <tr class="table-danger">
+                    <tr>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Content</th>

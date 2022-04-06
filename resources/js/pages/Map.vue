@@ -4,7 +4,7 @@
         <div
             class="background-serach input-group pt-5 justify-content-center flex-column align-items-center"
         >
-            <div class="container">
+            <div class="container d-flex flex-column align-items-center">
                 <div class="form-outline d-flex">
                     <input
                         type="search"
