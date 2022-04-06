@@ -1,5 +1,5 @@
 <template>
-    <div class="contain">
+<div class="contain">
         <!-- search bar  -->
         <div
             class="background-serach input-group pt-5 justify-content-center flex-column align-items-center"
@@ -107,7 +107,7 @@
         <div class="container">
             <div class="row p-3">
                 <div class="col-6 me-1">
-                    <div v-if="apartments">
+                    <div v-if="apartments.length == 0">
                         <div
                             class="row mb-5 border border-danger"
                             v-for="apartment in apartments"
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div v-else>
+                    <div v-else>
                         <div
                             class="row mb-5 border border-danger"
                             v-for="apartment in apartments"
@@ -172,7 +172,7 @@
                                 </router-link>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="map col-2" id="map" ref="mapRef"></div>
             </div>
@@ -313,16 +313,24 @@ export default {
 div.form-outline {
     width: 60%;
 }
-button {
+.btn-search {
     width: 10%;
 }
 #form1 {
     width: 100%;
 }
+
 .invisible {
     display: none;
+    height: 5px;
 }
+
 .visible {
     display: block;
+    padding-bottom: 0.8em;
+}
+
+.background-serach {
+    background-color: #032f6d;
 }
 </style>
