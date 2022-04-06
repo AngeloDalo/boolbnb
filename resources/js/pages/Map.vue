@@ -107,10 +107,10 @@
         <div class="container">
             <div class="row p-3">
                 <div class="col-6 me-1">
-                    <div v-if="filteredApartments.length == 0">
+                    <div v-if="apartments">
                         <div
                             class="row mb-5 border border-danger"
-                            v-for="apartment in KmFilterApartment"
+                            v-for="apartment in apartments"
                             :key="apartment.id"
                         >
                             <div class="col-6">
@@ -140,10 +140,10 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else>
+                    <!-- <div v-else>
                         <div
                             class="row mb-5 border border-danger"
-                            v-for="apartment in filteredApartments"
+                            v-for="apartment in apartments"
                             :key="apartment.id"
                         >
                             <div class="col-6">
@@ -172,7 +172,7 @@
                                 </router-link>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="map col-2" id="map" ref="mapRef"></div>
             </div>
@@ -196,12 +196,8 @@ export default {
                 lat: 41.8933203,
             },
             apartments: [],
-            KmFilterApartment: [],
-            allDistances: [],
-            filteredApartments: [],
             services: [],
             checkedServices: [],
-            apartment_services: [],
             km: 20,
             rooms: 1,
             beds: 1,
@@ -210,19 +206,14 @@ export default {
     created() {},
     mounted() {
         this.initializeMap(this.position.lng, this.position.lat);
-        this.getApartments();
         this.getServices();
     },
     methods: {
         search: function () {
-            this.KmFilterApartment = [];
-            this.apartment_services = [];
-
+            this.apartments = [];
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
-                this.filteredApartments = [];
-                this.getCheckedServices();
                 error.innerHTML = "";
                 error.classList.remove("alert");
                 error.classList.remove("alert-danger");
@@ -231,6 +222,7 @@ export default {
                         key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
                         query: this.query,
                     })
+                    
                     .then(this.handleResults);
             } else {
                 this.query = null;
@@ -240,46 +232,6 @@ export default {
                 error.classList.add("alert-danger");
             }
         },
-
-        getKmApartments: function () {
-            let llSearching = new tt.LngLat(
-                this.position.lng,
-                this.position.lat
-            );
-            // cicliamo sugli appartementi
-            let counter = 0;
-            this.apartments.forEach((apartment) => {
-                let llApartment = new tt.LngLat(
-                    apartment.longitude,
-                    apartment.latitude
-                );
-                let distance = llSearching.distanceTo(llApartment);
-                let distanceKm = distance / 1000;
-
-                // restituiamo gli app entro i 20 km
-                if (
-                    distanceKm <= this.km &&
-                    apartment.rooms >= this.rooms &&
-                    apartment.beds >= this.beds
-                ) {
-                    counter += 1;
-                    this.allDistances.push(distanceKm);
-                    this.KmFilterApartment.push(apartment);
-                    console.log(this.KmFilterApartment);
-                }
-            });
-            for (let i = 0; i < counter; i++) {
-                for (let j = 0; j < counter; j++) {
-                    if (this.allDistances[j] > this.allDistances[j + 1]) {
-                        let temp = this.KmFilterApartment[j];
-                        this.KmFilterApartment[j] =
-                            this.KmFilterApartment[j + 1];
-                        this.KmFilterApartment[j + 1] = temp;
-                    }
-                }
-            }
-        },
-
         validateSearch: function () {
             if (this.query && isNaN(this.query)) {
                 return true;
@@ -287,56 +239,38 @@ export default {
                 return false;
             }
         },
-
-        getCheckedServices: function () {
+        gtApartment: function () {
             const url = "http://127.0.0.1:8000/api/v1/apartments/search";
-            Axios.post(url, { services: this.checkedServices })
+            Axios.post(url, {
+                rooms: this.rooms,
+                beds: this.beds,
+                km: this.km,
+                position: this.position,
+                checkedServices: this.checkedServices
+            })
                 .then((result) => {
-                    this.apartment_services = result.data.results.data;
-                    this.KmFilterApartment.forEach((apartment) => {
-                        this.apartment_services.forEach((element) => {
-                            if (
-                                apartment.id == element.id &&
-                                apartment.rooms >= this.rooms &&
-                                apartment.beds >= this.beds
-                            ) {
-                                this.filteredApartments.push(apartment);
-                            }
-                        });
-                    });
-                    console.log("filteredapartment", this.filteredApartments);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-
-        getServices: function () {
-            const url = "http://127.0.0.1:8000/api/v1/services";
-            Axios.get(url)
-                .then((result) => {
-                    this.services = result.data.results;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-
-        getApartments: function () {
-            const url = "http://127.0.0.1:8000/api/v1/apartments";
-            Axios.get(url)
-                .then((result) => {
-                    this.apartments = result.data.results;
-                    // cicliamo sugli app per avere i marker
+                    this.apartments = result.data.results.apartments;
+                    console.log(result.data);
                     this.apartments.forEach((apartment) => {
                         let llApartment = new tt.LngLat(
                             apartment.longitude,
                             apartment.latitude
                         );
-                        var marker = new tt.Marker()
+                        let marker = new tt.Marker()
                             .setLngLat(llApartment)
                             .addTo(this.map);
                     });
+                    console.log('data', result.data.results);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getServices: function () {
+            const url = "http://127.0.0.1:8000/api/v1/services";
+            Axios.get(url)
+                .then((result) => {
+                    this.services = result.data.results;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -348,7 +282,7 @@ export default {
                 this.position.lat = result.results[0].position.lat;
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
-                this.getKmApartments();
+                this.gtApartment();
             }
         },
         initializeMap(lng, lat) {
@@ -379,24 +313,16 @@ export default {
 div.form-outline {
     width: 60%;
 }
-.btn-search {
+button {
     width: 10%;
 }
 #form1 {
     width: 100%;
 }
-
 .invisible {
     display: none;
-    height: 5px;
 }
-
 .visible {
     display: block;
-    padding-bottom: 0.8em;
-}
-
-.background-serach {
-    background-color: #032f6d;
 }
 </style>
