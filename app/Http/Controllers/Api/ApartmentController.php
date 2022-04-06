@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
 use App\Service;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -13,12 +15,6 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::orderBy('created_at', 'desc')->get();
-
-        return response()->json([
-            'response' => true,
-            'results' => $apartments,
-        ]);
     }
     public function search(Request $request)
     {
@@ -32,21 +28,45 @@ class ApartmentController extends Controller
         $searchedLng = $position['lng'];
         $apartmentDistance = [];
         $checkedSer = $data['checkedServices'];
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> a00f621de344a75cae2ae4f8d87c6100bfc34f35
 
 
         //aperta chiamata ma non chiusa per avere continui aggiornamenti
         $apartments = Apartment::where('id', '>=', 1);
 
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> a00f621de344a75cae2ae4f8d87c6100bfc34f35
         $apartments = $apartments->with('services')->where('visible', '=', 1)->where('rooms', '>=', $rooms)->where('beds', '>=', $beds);
         foreach ($data['checkedServices'] as $service) {
             $apartments = $apartments->whereHas('services', function (Builder $query) use ($service) {
                 $query->where('name', '=', $service);
             });
+<<<<<<< HEAD
+=======
+        }
+        $apartments = $apartments->get();
+        
+        foreach ($apartments as $key => $apartment) {
+            $apartmentLat = floatval($apartment->latitude);
+            $apartmentLng = floatval($apartment->longitude);
+            $distance = distance($searchedLat, $searchedLng, $apartmentLat, $apartmentLng);
+            if ($distance > $KmRaggio) {
+                $apartments = $apartments->except($apartment->id);
+            } else {
+                array_push($apartmentDistance, $distance);
+            }
+>>>>>>> a00f621de344a75cae2ae4f8d87c6100bfc34f35
         }
         $apartments = $apartments->get();
 
+<<<<<<< HEAD
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
             $apartmentLng = floatval($apartment->longitude);
@@ -58,6 +78,8 @@ class ApartmentController extends Controller
             }
         }
 
+=======
+>>>>>>> a00f621de344a75cae2ae4f8d87c6100bfc34f35
         return response()->json([
             'response' => true,
             'results' =>  [
@@ -67,6 +89,7 @@ class ApartmentController extends Controller
             ],
         ]);
     }
+<<<<<<< HEAD
     public function show($id)
     {
         $apartment = Apartment::find($id);
@@ -80,6 +103,9 @@ class ApartmentController extends Controller
     }
 }
 
+=======
+}
+>>>>>>> a00f621de344a75cae2ae4f8d87c6100bfc34f35
 function distance($lat1, $lon1, $lat2, $lon2)
 {
     $r = 6372.797; // mean radius of Earth in km
