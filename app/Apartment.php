@@ -65,7 +65,7 @@ class Apartment extends Model
         return $this->belongsToMany('App\Service');
     }
 
-    public function sponsorships()
+    public function sponsorship()
     {
         return $this->belongsToMany('App\Sponsorship');
     }

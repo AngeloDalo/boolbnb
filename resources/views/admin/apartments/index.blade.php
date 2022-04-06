@@ -43,6 +43,7 @@
                                     <a class="btn btn-danger"
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Update</a>
                                 </td>
+                                <td><a class="btn btn-danger" href="{{route('admin.sponsorships.edit', $apartment->id)}}">Sponsorhip</a></td>
                             </tr>
                         @endforeach
                     </tbody>
