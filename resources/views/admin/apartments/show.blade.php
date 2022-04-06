@@ -38,6 +38,7 @@
             </div>
         </div>
         <a class="btn btn-danger mt-5" href="{{ route('admin.apartments.index') }}">My Apartments</a>
+        <a class="btn btn-danger mt-5" href="{{ route('admin.payment.index', $apartment) }}">Sponsorship</a>
 
         <div class="mt-5">
             <table class="table">

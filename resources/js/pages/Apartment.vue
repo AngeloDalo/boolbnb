@@ -1,4 +1,5 @@
 <template>
+<div class="container">
     <div class="container">
         <div class="row border border-danger rounded-3 p-3">
             <div class="col-6">
@@ -15,8 +16,9 @@
             </div>
         </div>
         <!-- mappa -->
-        <div class="map" id="map" ref="mapRef"></div>
     </div>
+    <div class="map" id="map" ref="mapRef"></div>
+</div>
 </template>
 
 <script>

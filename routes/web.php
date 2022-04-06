@@ -26,6 +26,9 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('apartments', 'ApartmentController');
+        Route::get('/payment/{apartment}', 'PaymentController@index')->name('payment.index');
+        Route::post('/payment/{apartment}/checkout', 'PaymentController@checkout')->name('payment.checkout');
+        Route::get('/payment/{apartment}/transaction', 'PaymentController@transaction')->name('payment.transaction');
     });
 
 Route::get('{any?}', function ($name = null) {
