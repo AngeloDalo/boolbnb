@@ -1,98 +1,102 @@
 <template>
-    <div class="container">
+    <div class="contain">
         <!-- search bar  -->
         <div
-            class="input-group my-5 justify-content-center flex-column align-items-center"
+            class="background-serach input-group pt-5 justify-content-center flex-column align-items-center"
         >
-            <div class="form-outline d-flex">
-                <input
-                    type="search"
-                    id="searchBar"
-                    class="form-control me-2"
-                    placeholder="Search"
-                    v-model="query"
-                    @keyup.enter="search()"
-                    required
-                />
-                <p id="searchDemo"></p>
-                <button
-                    type="button"
-                    class="btn btn-danger btn-search"
-                    @click="search()"
-                    value="Submit form"
-                >
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-
-            <div>
-                <div class="d-flex justify-content-evenly my-3">
-                    <div class="col-auto my-1">
-                        <label>Distance</label>
-                        <select
-                            class="custom-select mr-sm-2"
-                            id="inlineFormCustomSelect"
-                            v-model="km"
-                        >
-                            <option value="20" selected>20Km</option>
-                            <option value="40">40Km</option>
-                            <option value="60">60Km</option>
-                        </select>
-                    </div>
-                    <div class="col-auto my-1">
-                        <label>Number of rooms</label>
-                        <select
-                            class="custom-select mr-sm-2"
-                            id="inlineFormCustomSelect"
-                            v-model="rooms"
-                        >
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5+</option>
-                        </select>
-                    </div>
-                    <div class="col-auto my-1">
-                        <label>Number of beds</label>
-                        <select
-                            class="custom-select mr-sm-2"
-                            id="inlineFormCustomSelect"
-                            v-model="beds"
-                        >
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5+</option>
-                        </select>
-                    </div>
+            <div class="container">
+                <div class="form-outline d-flex">
+                    <input
+                        type="search"
+                        id="searchBar"
+                        class="form-control me-2"
+                        placeholder="Search"
+                        v-model="query"
+                        @keyup.enter="search()"
+                        required
+                    />
+                    <p id="searchDemo"></p>
                     <button
                         type="button"
-                        class="btn btn-outline-danger"
-                        @click="viewServices = !viewServices"
+                        class="btn btn-danger btn-search"
+                        @click="search()"
+                        value="Submit form"
                     >
-                        <i class="bi bi-filter-circle"></i> Filter
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
 
-                <div
-                    class="d-flex row"
-                    :class="viewServices == false ? 'invisible' : 'visible'"
-                >
+                <div>
+                    <div class="d-flex justify-content-evenly my-3">
+                        <div class="col-auto my-1">
+                            <label class="text-danger">Distance</label>
+                            <select
+                                class="custom-select mr-sm-2"
+                                id="inlineFormCustomSelect"
+                                v-model="km"
+                            >
+                                <option value="20" selected>20Km</option>
+                                <option value="40">40Km</option>
+                                <option value="60">60Km</option>
+                            </select>
+                        </div>
+                        <div class="col-auto my-1">
+                            <label class="text-danger">Number of rooms</label>
+                            <select
+                                class="custom-select mr-sm-2"
+                                id="inlineFormCustomSelect"
+                                v-model="rooms"
+                            >
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5+</option>
+                            </select>
+                        </div>
+                        <div class="col-auto my-1">
+                            <label class="text-danger">Number of beds</label>
+                            <select
+                                class="custom-select mr-sm-2"
+                                id="inlineFormCustomSelect"
+                                v-model="beds"
+                            >
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5+</option>
+                            </select>
+                        </div>
+                        <button
+                            type="button"
+                            class="btn btn-outline-danger"
+                            @click="viewServices = !viewServices"
+                        >
+                            <i class="bi bi-filter-circle"></i> Filter
+                        </button>
+                    </div>
+
                     <div
-                        class="form-check col-3"
-                        v-for="(service, index) in services"
-                        :key="index"
+                        class="d-flex row"
+                        :class="viewServices == false ? 'invisible' : 'visible'"
                     >
-                        <label :for="service.id">{{ service.name }}</label>
-                        <input
-                            class="form-check-input position-static"
-                            type="checkbox"
-                            :id="service.id"
-                            :value="service.name"
-                            v-model="checkedServices"
-                        />
+                        <div
+                            class="form-check col-3"
+                            v-for="(service, index) in services"
+                            :key="index"
+                        >
+                            <label class="text-danger" :for="service.id">{{
+                                service.name
+                            }}</label>
+                            <input
+                                class="form-check-input position-static"
+                                type="checkbox"
+                                :id="service.id"
+                                :value="service.name"
+                                v-model="checkedServices"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,40 +104,78 @@
 
         <!-- mappa -->
         <h1 class="font-weight-bold text-uppercase text-danger">apartments</h1>
-        <div class="row p-3">
-            <div class="col-6 me-1">
-                <div v-if="filteredApartments.length == 0">
-                    <div class="row mb-5 border border-danger" v-for="apartment in KmFilterApartment" :key="apartment.id">
-                        <div class="col-6">
-                            <img class="w-100" :src="'storage/' + apartment.image" :alt="apartment.title">
+        <div class="container">
+            <div class="row p-3">
+                <div class="col-6 me-1">
+                    <div v-if="filteredApartments.length == 0">
+                        <div
+                            class="row mb-5 border border-danger"
+                            v-for="apartment in KmFilterApartment"
+                            :key="apartment.id"
+                        >
+                            <div class="col-6">
+                                <img
+                                    class="w-100"
+                                    :src="'storage/' + apartment.image"
+                                    :alt="apartment.title"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <h3 class="font-weight-bold text-danger">
+                                    {{ apartment.title }}
+                                </h3>
+                                <p>Prirce: {{ apartment.price }}</p>
+                                <p>Rooms: {{ apartment.rooms }}</p>
+                                <p>Bed: {{ apartment.beds }}</p>
+                                <p>Square: {{ apartment.square }}</p>
+                                <router-link
+                                    class="btn btn-danger mb-2"
+                                    :to="{
+                                        name: 'apartment',
+                                        params: { id: apartment.id },
+                                    }"
+                                >
+                                    View
+                                </router-link>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
-                            <p>Prirce: {{ apartment.price }}</p>
-                            <p>Rooms: {{ apartment.rooms }}</p>
-                            <p>Bed: {{ apartment.beds }}</p>
-                            <p>Square: {{ apartment.square }}</p>
-                            <router-link class="btn btn-danger mb-2" :to="{ name: 'apartment', params: { id: apartment.id } }"> View </router-link>
-                        </div> 
+                    </div>
+                    <div v-else>
+                        <div
+                            class="row mb-5 border border-danger"
+                            v-for="apartment in filteredApartments"
+                            :key="apartment.id"
+                        >
+                            <div class="col-6">
+                                <img
+                                    class="w-100"
+                                    :src="'storage/' + apartment.image"
+                                    :alt="apartment.title"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <h3 class="font-weight-bold text-danger">
+                                    {{ apartment.title }}
+                                </h3>
+                                <p>Prirce: {{ apartment.price }}</p>
+                                <p>Rooms: {{ apartment.rooms }}</p>
+                                <p>Bed: {{ apartment.beds }}</p>
+                                <p>Square: {{ apartment.square }}</p>
+                                <router-link
+                                    class="btn btn-danger mb-2"
+                                    :to="{
+                                        name: 'apartment',
+                                        params: { id: apartment.id },
+                                    }"
+                                >
+                                    View
+                                </router-link>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div v-else>
-                    <div class="row mb-5 border border-danger" v-for="apartment in filteredApartments" :key="apartment.id"> 
-                        <div class="col-6">
-                            <img class="w-100" :src="'storage/' + apartment.image" :alt="apartment.title">
-                        </div>
-                        <div class="col-6">
-                            <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
-                            <p>Prirce: {{ apartment.price }}</p>
-                            <p>Rooms: {{ apartment.rooms }}</p>
-                            <p>Bed: {{ apartment.beds }}</p>
-                            <p>Square: {{ apartment.square }}</p>
-                            <router-link class="btn btn-danger mb-2" :to="{ name: 'apartment', params: { id: apartment.id } }"> View </router-link>
-                        </div> 
-                    </div>
-                </div>
+                <div class="map col-2" id="map" ref="mapRef"></div>
             </div>
-            <div class="map col-2" id="map" ref="mapRef"></div>
         </div>
     </div>
 </template>
@@ -346,9 +388,15 @@ div.form-outline {
 
 .invisible {
     display: none;
+    height: 5px;
 }
 
 .visible {
     display: block;
+    padding-bottom: 0.8em;
+}
+
+.background-serach {
+    background-color: #032f6d;
 }
 </style>

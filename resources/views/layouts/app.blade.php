@@ -25,10 +25,10 @@
 
 <body>
     <div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="padding: 0 !important">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img style="width: 80px" src="{{ URL('img/logoBoolBnb.png') }}" alt="">
+                    <img style="width: 60px" src="{{ URL('img/logoBoolBnb.png') }}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -70,7 +70,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                             document.getElementById('logout-form').submit();">
+                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
