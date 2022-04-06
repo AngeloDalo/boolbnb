@@ -27,71 +27,39 @@ class ApartmentController extends Controller
         $searchedLat = $position['lat'];
         $searchedLng = $position['lng'];
         $apartmentDistance = [];
-        $checkedServices = $data['checkedServices'];
-        // $servicesApartment = [];
+        $checkedSer = $data['checkedServices'];
         
 
 
         //aperta chiamata ma non chiusa per avere continui aggiornamenti
-        $apartments = Apartment::where('id', '>=', 1)->with('services');
+        $apartments = Apartment::where('id', '>=', 1);
 
-        // $testJoiningTables = Apartment::with('services')
-        // join('apartment_service', 'apartment_service.apartment_id', '=', 'apartment_service.apartment_id')
-        // ->join('services', 'apartment_service.service_id', '=', 'services.id')
-        // ->select('apartments.id')
-        // ->where('services.id', '=', 'apartment_service.service_id')
         
-        
-        
-        
-        // ->select('apartments.*', 'apartments.id', 'apartment_service.apartment_id')
-        // ->get();
-        // foreach ($apartments as $apartment) {
-        //     # code...
-        //     $$apartments = $testJoiningTables;
-        // }
-
-        // Se esistono i services all'interno di data passati tramite request
-        
-        $apartments = $apartments->with('services')->where('visible', '=', 1)->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
+        $apartments = $apartments->with('services')->where('visible', '=', 1)->where('rooms', '>=', $rooms)->where('beds', '>=', $beds);
+        foreach ($data['checkedServices'] as $service) {
+            $apartments = $apartments->whereHas('services', function (Builder $query) use ($service) {
+                $query->where('name', '=', $service);
+            });
+        }
+        $apartments = $apartments->get();
         
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
             $apartmentLng = floatval($apartment->longitude);
             $distance = distance($searchedLat, $searchedLng, $apartmentLat, $apartmentLng);
-            if (array_key_exists('services', $data)) {
-                // $testingArray = Arr::pluck($data['services'], 'services.name');
-                // foreach ($data['services'] as $service) {
-                //     $apartments->whereHas('services', function (Builder $query) use ($service) {
-                //         $query->where('name', '=', $service);
-                //     })->get();
-                // }
-            }
-            //     if (in_array($data['services.name'], $checkedServices)) {
-            //         # code...
-            //         $apartments = $apartments->where('services', '=', $checkedServices)->get();
-            //     }
-            // }
-            // $services = [$apartment->services];
-            // $servicesApartment = $services;
             if ($distance > $KmRaggio) {
-                $apartments->forget($key);
+                $apartments = $apartments->except($apartment->id);
             } else {
                 array_push($apartmentDistance, $distance);
-                // $apartments->with('distance')->get();
             }
         }
 
-
         return response()->json([
             'response' => true,
-            'count' =>  $apartments->count(),
             'results' =>  [
                 'apartments' => $apartments,
-                'distance' => $apartmentDistance,
-                'checked' => $checkedServices,
-                'testApp' => $apartments,
                 'data' => $data,
+                'checkedser' => $checkedSer
             ],
         ]);
     }

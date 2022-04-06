@@ -102,14 +102,14 @@
         <div class="d-flex justify-content-between p-3">
             <div>
                 <h1>appartamenti</h1>
-                <div v-if="apartment_services.length == 0">
+                <div v-if="apartments.length == 0">
                     <h2>
                         Search Not Found
                     </h2>
                 </div>
                 <div v-else>
                     <h2
-                        v-for="apartment in apartment_services"
+                        v-for="apartment in apartments"
                         :key="apartment.id"
                     >
                         {{ apartment.title }}
@@ -136,8 +136,7 @@ export default {
                 lng: 12.4829321,
                 lat: 41.8933203,
             },
-            apartment_services: [],
-            apartmentDistance: [],
+            apartments: [],
             services: [],
             checkedServices: [],
             km: 20,
@@ -148,16 +147,14 @@ export default {
     created() {},
     mounted() {
         this.initializeMap(this.position.lng, this.position.lat);
-        // this.getApartments();
         this.getServices();
     },
     methods: {
         search: function () {
-            this.apartment_services = [];
+            this.apartments = [];
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
-                this.filteredApartments = [];
                 error.innerHTML = "";
                 error.classList.remove("alert");
                 error.classList.remove("alert-danger");
@@ -166,6 +163,7 @@ export default {
                         key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
                         query: this.query,
                     })
+                    
                     .then(this.handleResults);
             } else {
                 this.query = null;
@@ -194,15 +192,21 @@ export default {
                 checkedServices: this.checkedServices
             })
                 .then((result) => {
-                    this.apartment_services = result.data.results.apartments;
-                    this.apartmentDistance = result.data.results.distance;
-                    // console.log(result.data.results.testing);
-                    console.log('apartment[0]', result.data.results.apartments[0]);
-                    console.log('checked', result.data.results.checked);
-                    console.log('data', result.data.results.data);
+                    this.apartments = result.data.results.apartments;
+                    console.log(result.data);
+                    this.apartments.forEach((apartment) => {
+                        let llApartment = new tt.LngLat(
+                            apartment.longitude,
+                            apartment.latitude
+                        );
+                        let marker = new tt.Marker()
+                            .setLngLat(llApartment)
+                            .addTo(this.map);
+                    });
+                    console.log('data', result.data.results);
                 })
                 .catch((error) => {
-                    console.log(error.response.data);
+                    console.log(error);
                 });
         },
 
@@ -224,7 +228,6 @@ export default {
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
                 this.gtApartment();
-                // console.log('log di handle result',result.results);
             }
         },
         initializeMap(lng, lat) {
