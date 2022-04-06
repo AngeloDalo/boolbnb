@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
 use App\Service;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -26,32 +28,57 @@ class ApartmentController extends Controller
         $searchedLng = $position['lng'];
         $apartmentDistance = [];
         $checkedServices = $data['checkedServices'];
-        $servicesApartment = [];
-        // $apartmanteServices = $data['services'];
-        // $apartments = Apartment::with('services')->get();
-
+        // $servicesApartment = [];
+        
 
 
         //aperta chiamata ma non chiusa per avere continui aggiornamenti
-        $apartments = Apartment::where('id', '>=', 1);
+        $apartments = Apartment::where('id', '>=', 1)->with('services');
 
+        // $testJoiningTables = Apartment::with('services')
+        // join('apartment_service', 'apartment_service.apartment_id', '=', 'apartment_service.apartment_id')
+        // ->join('services', 'apartment_service.service_id', '=', 'services.id')
+        // ->select('apartments.id')
+        // ->where('services.id', '=', 'apartment_service.service_id')
+        
+        
+        
+        
+        // ->select('apartments.*', 'apartments.id', 'apartment_service.apartment_id')
+        // ->get();
+        // foreach ($apartments as $apartment) {
+        //     # code...
+        //     $$apartments = $testJoiningTables;
+        // }
 
-        $apartments = $apartments->where('visible', '=', 1)->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
-
+        // Se esistono i services all'interno di data passati tramite request
+        
+        $apartments = $apartments->with('services')->where('visible', '=', 1)->where('rooms', '>=', $rooms)->where('beds', '>=', $beds)->get();
+        
         foreach ($apartments as $key => $apartment) {
             $apartmentLat = floatval($apartment->latitude);
             $apartmentLng = floatval($apartment->longitude);
             $distance = distance($searchedLat, $searchedLng, $apartmentLat, $apartmentLng);
-            $services = [$apartment->services];
-            $servicesApartment = $services;
-            // if (!isset($checkedServices) && $checkedServices !== $servicesApartment) {
-            //     $test = $apartments;
+            if (array_key_exists('services', $data)) {
+                // $testingArray = Arr::pluck($data['services'], 'services.name');
+                // foreach ($data['services'] as $service) {
+                //     $apartments->whereHas('services', function (Builder $query) use ($service) {
+                //         $query->where('name', '=', $service);
+                //     })->get();
+                // }
+            }
+            //     if (in_array($data['services.name'], $checkedServices)) {
+            //         # code...
+            //         $apartments = $apartments->where('services', '=', $checkedServices)->get();
+            //     }
             // }
+            // $services = [$apartment->services];
+            // $servicesApartment = $services;
             if ($distance > $KmRaggio) {
                 $apartments->forget($key);
             } else {
                 array_push($apartmentDistance, $distance);
-                // $apartments = $apartments->where(in_array([$checkedServices], $servicesApartment))->get();
+                // $apartments->with('distance')->get();
             }
         }
 
@@ -61,21 +88,10 @@ class ApartmentController extends Controller
             'count' =>  $apartments->count(),
             'results' =>  [
                 'apartments' => $apartments,
-                // 'distances' => $apartmentDistance,
-                // 'rooms' => $rooms,
-                // 'beds' => $beds,
-                // 'raggioKm' => $KmRaggio,
-                // 'position' => $position,
-                // 'searchedLat' => $searchedLat,
-                // 'searchedLng' => $searchedLng,
-                // 'apartmentLat' => $apartmentLat,
-                // 'apartmentLng' => $apartmentLng, 
-                // 'distance' => $apartmentDistance,
-                'services' => $servicesApartment,
+                'distance' => $apartmentDistance,
                 'checked' => $checkedServices,
                 'testApp' => $apartments,
-                // 'filteredAPp' => $filteredApartments 
-
+                'data' => $data,
             ],
         ]);
     }

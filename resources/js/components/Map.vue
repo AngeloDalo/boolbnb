@@ -153,10 +153,7 @@ export default {
     },
     methods: {
         search: function () {
-            // this.KmFilterApartment = [];
             this.apartment_services = [];
-            // this.allDistances = [];
-            // console.log(this.distances);
             let error = document.getElementById("searchDemo");
             let message = "";
             if (this.validateSearch()) {
@@ -198,10 +195,11 @@ export default {
             })
                 .then((result) => {
                     this.apartment_services = result.data.results.apartments;
-                    this.apartmentDistance = result.data.results.distances;
-                    // console.log("result", result.data.results.distances);
-                    console.log(result.data.results.checked);
-                    console.log(result.data.results);
+                    this.apartmentDistance = result.data.results.distance;
+                    // console.log(result.data.results.testing);
+                    console.log('apartment[0]', result.data.results.apartments[0]);
+                    console.log('checked', result.data.results.checked);
+                    console.log('data', result.data.results.data);
                 })
                 .catch((error) => {
                     console.log(error.response.data);
