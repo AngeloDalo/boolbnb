@@ -30,11 +30,13 @@ import Axios from "axios";
         return {
             map: null,
             apartment: null,
+            services: [],
         }
     },
     created() {
         const url = 'http://127.0.0.1:8000/api/v1/apartments/' + this.id;
         this.getApartment(url);
+        this.getServicesShow(url);
     },
     mounted() {
     },
@@ -45,6 +47,18 @@ import Axios from "axios";
                 this.apartment = result.data.results.data;
                 this.initializeMap()
             }).catch(error => console.log(error));
+        },
+        getServicesShow: function () {
+            const url = "http://127.0.0.1:8000/api/v1/serviceshow";
+            Axios.get(url, {
+            })
+                .then((result) => {
+                    this.services = result.data.results.apartments;
+                    console.log(result.data.results.apartments);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
         initializeMap() {
             console.log(this.apartment);

@@ -27,6 +27,7 @@
                             <th>Updated at</th>
                             <th>View</th>
                             <th>Update</th>
+                            <th>Sponsorship</th>
                         </tr>
                     </thead>
                     <tbody>

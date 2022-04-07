@@ -103,24 +103,29 @@
         </div>
 
         <!-- mappa -->
-        <h1 class="font-weight-bold text-uppercase text-danger">apartments</h1>
-        <div class="container">
-            <div class="row p-3">
-                <div class="col-6 me-1">
-                    <div v-if="apartments.length == 0">
+        <div class="cont-apartments container-fluid py-4">
+            <div class="row p-3 overflow-master">
+                <div class="col-md-12 col-lg-6 overflow">
+                    <div class="" v-if="apartments.length == 0">
+                        <!-- <img
+                            class="written-boolbnb"
+                            :src="require('/public/img/logoBoolBnb.png')"
+                            alt=""
+                        /> -->
+
                         <div
-                            class="row mb-5 border border-danger"
+                            class="row mb-3 border border-danger rounded-3 p-3 bg-light"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-6">
+                            <div class="col-7">
                                 <img
-                                    class="w-100"
+                                    class="w-100 h-100 rounded-3"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
                             </div>
-                            <div class="col-6">
+                            <div class="col-5">
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
@@ -142,18 +147,18 @@
                     </div>
                     <div v-else>
                         <div
-                            class="row mb-5 border border-danger"
+                            class="row mb-5 border border-danger rounded-3 p-3 bg-light"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-6">
+                            <div class="col-7">
                                 <img
-                                    class="w-100"
+                                    class="w-100 h-100 rounded-3"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
                             </div>
-                            <div class="col-6">
+                            <div class="col-5">
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
@@ -162,7 +167,7 @@
                                 <p>Bed: {{ apartment.beds }}</p>
                                 <p>Square: {{ apartment.square }}</p>
                                 <router-link
-                                    class="btn btn-danger mb-2"
+                                    class="btn btn-danger mb-2 text-light"
                                     :to="{
                                         name: 'apartment',
                                         params: { id: apartment.id },
@@ -174,7 +179,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="map col-2" id="map" ref="mapRef"></div>
+
+                <div class="map col-md-12 col-lg-4" id="map" ref="mapRef"></div>
             </div>
         </div>
     </div>
@@ -316,9 +322,26 @@ export default {
 
 <style lang="scss" scoped>
 #map {
-    width: 45%;
-    height: 40vh;
+    margin-left: 7em;
+    height: 400px;
 }
+
+.overflow {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+     background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
+ }
+
+.cont-apartments {
+    background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
 div.form-outline {
     width: 60%;
 }
@@ -342,4 +365,5 @@ div.form-outline {
 .background-serach {
     background-color: #032f6d;
 }
+
 </style>
