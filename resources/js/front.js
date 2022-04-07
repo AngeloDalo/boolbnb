@@ -15,7 +15,7 @@ const router = new VueRouter({
     mode: 'history',
     routes:  [
             {
-                path: '/',
+                path: '/search',
                 name: 'map',
                 component: Map
             },
@@ -31,7 +31,7 @@ const router = new VueRouter({
                 component: Contact
             },
             {
-                path: '/sponsor',
+                path: '/',
                 name: 'sponsor',
                 component: Sponsor
             },
