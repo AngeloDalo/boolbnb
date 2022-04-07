@@ -37,24 +37,25 @@ import Axios from "axios";
         this.getApartment(url);
     },
     mounted() {
-        this.initializeMap()
     },
     methods: {
         getApartment(url){
             Axios.get(url).then(
                 (result) => {
                 this.apartment = result.data.results.data;
+                this.initializeMap()
             }).catch(error => console.log(error));
         },
         initializeMap() {
+            console.log(this.apartment);
             this.map = tt.map({
             key: '2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z',
             container: this.$refs.mapRef,
-            center: [17.277969, 40.4657082],
+            center: [this.apartment.longitude, this.apartment.latitude],
             zoom: 14
         });
         new tt.Marker()
-            .setLngLat([17.277969, 40.4657082])
+            .setLngLat([this.apartment.longitude, this.apartment.latitude])
             .addTo(this.map);
             this.map.addControl(new tt.FullscreenControl());
             this.map.addControl(new tt.NavigationControl());
