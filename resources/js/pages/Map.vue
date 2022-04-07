@@ -103,19 +103,18 @@
         </div>
 
         <!-- mappa -->
-        <h1 class="font-weight-bold text-uppercase text-danger">apartments</h1>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-6 me-1">
                     <div v-if="apartments.length == 0">
                         <div
-                            class="row mb-5 border border-danger"
+                            class="row mb-5 border border-danger rounded-3 p-3"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
                             <div class="col-6">
                                 <img
-                                    class="w-100"
+                                    class="w-100 h-100"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
@@ -142,13 +141,13 @@
                     </div>
                     <div v-else>
                         <div
-                            class="row mb-5 border border-danger"
+                            class="row mb-5 border border-danger rounded-3 p-3"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
                             <div class="col-6">
                                 <img
-                                    class="w-100"
+                                    class="w-100 h-100"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
@@ -174,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="map col-2" id="map" ref="mapRef"></div>
+                <div class="map col-5 ms-5" id="map" ref="mapRef"></div>
             </div>
         </div>
     </div>
@@ -239,6 +238,33 @@ export default {
             } else {
                 return false;
             }
+        },
+        gtApartment: function () {
+            const url = "http://127.0.0.1:8000/api/v1/apartments/search";
+            Axios.post(url, {
+                rooms: this.rooms,
+                beds: this.beds,
+                km: this.km,
+                position: this.position,
+                checkedServices: this.checkedServices,
+            })
+                .then((result) => {
+                    this.apartments = result.data.results.apartments;
+                    console.log(result.data);
+                    this.apartments.forEach((apartment) => {
+                        let llApartment = new tt.LngLat(
+                            apartment.longitude,
+                            apartment.latitude
+                        );
+                        let marker = new tt.Marker()
+                            .setLngLat(llApartment)
+                            .addTo(this.map);
+                    });
+                    console.log("data", result.data.results);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
         getServices: function () {
             const url = "http://127.0.0.1:8000/api/v1/services";
@@ -315,10 +341,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#map {
-    width: 45%;
-    height: 40vh;
-}
+// #map {
+//     width: 45vh;
+//     height: 45vw;
+// }
 div.form-outline {
     width: 60%;
 }
