@@ -1,5 +1,5 @@
 <template>
-<div class="contain">
+    <div class="contain">
         <!-- search bar  -->
         <div
             class="background-serach input-group pt-5 justify-content-center flex-column align-items-center"
@@ -195,6 +195,7 @@ export default {
                 lng: 12.4829321,
                 lat: 41.8933203,
             },
+            markers: [],
             apartments: [],
             services: [],
             checkedServices: [],
@@ -222,7 +223,7 @@ export default {
                         key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
                         query: this.query,
                     })
-                    
+
                     .then(this.handleResults);
             } else {
                 this.query = null;
@@ -239,33 +240,6 @@ export default {
                 return false;
             }
         },
-        gtApartment: function () {
-            const url = "http://127.0.0.1:8000/api/v1/apartments/search";
-            Axios.post(url, {
-                rooms: this.rooms,
-                beds: this.beds,
-                km: this.km,
-                position: this.position,
-                checkedServices: this.checkedServices
-            })
-                .then((result) => {
-                    this.apartments = result.data.results.apartments;
-                    console.log(result.data);
-                    this.apartments.forEach((apartment) => {
-                        let llApartment = new tt.LngLat(
-                            apartment.longitude,
-                            apartment.latitude
-                        );
-                        let marker = new tt.Marker()
-                            .setLngLat(llApartment)
-                            .addTo(this.map);
-                    });
-                    console.log('data', result.data.results);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         getServices: function () {
             const url = "http://127.0.0.1:8000/api/v1/services";
             Axios.get(url)
@@ -278,11 +252,15 @@ export default {
         },
         handleResults: function (result) {
             if (result.results) {
+                this.apartments = [];
                 this.position.lng = result.results[0].position.lng;
                 this.position.lat = result.results[0].position.lat;
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
-                this.gtApartment();
+                this.getApartment();
+                this.markers.forEach(marker => {
+                    marker.remove();
+                });
             }
         },
         initializeMap(lng, lat) {
@@ -300,6 +278,37 @@ export default {
                 center: lnglat,
                 zoom: 9,
             });
+        },
+        getApartment: function () {
+            const url = "http://127.0.0.1:8000/api/v1/apartments/search";
+            Axios.post(url, {
+                rooms: this.rooms,
+                beds: this.beds,
+                km: this.km,
+                position: this.position,
+                checkedServices: this.checkedServices,
+            })
+                .then((result) => {
+                    this.apartments = result.data.results.apartments;
+                    console.log(result.data);
+                    this.apartments.forEach((apartment) => {
+                        let llApartment = new tt.LngLat(
+                            apartment.longitude,
+                            apartment.latitude
+                        );
+                        let marker = new tt.Marker()
+                            .setLngLat(llApartment)
+                            .addTo(this.map);
+
+                        this.markers.push(marker);
+                        console.log("markers dentro foreach", this.markers);
+                    });
+                    console.log("data", result.data.results);
+                    console.log("markers fuori foreach", this.markers);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
 };
