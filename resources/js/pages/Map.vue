@@ -1,5 +1,5 @@
 <template>
-<div class="contain">
+    <div class="contain">
         <!-- search bar  -->
         <div
             class="background-serach input-group pt-5 justify-content-center flex-column align-items-center"
@@ -103,19 +103,18 @@
         </div>
 
         <!-- mappa -->
-        <h1 class="font-weight-bold text-uppercase text-danger">apartments</h1>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-6 me-1">
                     <div v-if="apartments.length == 0">
                         <div
-                            class="row mb-5 border border-danger"
+                            class="row mb-5 border border-danger rounded-3 p-3"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
                             <div class="col-6">
                                 <img
-                                    class="w-100"
+                                    class="w-100 h-100"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
@@ -142,13 +141,13 @@
                     </div>
                     <div v-else>
                         <div
-                            class="row mb-5 border border-danger"
+                            class="row mb-5 border border-danger rounded-3 p-3"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
                             <div class="col-6">
                                 <img
-                                    class="w-100"
+                                    class="w-100 h-100"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
@@ -174,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="map col-2" id="map" ref="mapRef"></div>
+                <div class="map col-5 ms-5" id="map" ref="mapRef"></div>
             </div>
         </div>
     </div>
@@ -222,7 +221,7 @@ export default {
                         key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
                         query: this.query,
                     })
-                    
+
                     .then(this.handleResults);
             } else {
                 this.query = null;
@@ -246,7 +245,7 @@ export default {
                 beds: this.beds,
                 km: this.km,
                 position: this.position,
-                checkedServices: this.checkedServices
+                checkedServices: this.checkedServices,
             })
                 .then((result) => {
                     this.apartments = result.data.results.apartments;
@@ -260,7 +259,7 @@ export default {
                             .setLngLat(llApartment)
                             .addTo(this.map);
                     });
-                    console.log('data', result.data.results);
+                    console.log("data", result.data.results);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -306,10 +305,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#map {
-    width: 45%;
-    height: 40vh;
-}
+// #map {
+//     width: 45vh;
+//     height: 45vw;
+// }
 div.form-outline {
     width: 60%;
 }
