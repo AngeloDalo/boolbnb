@@ -7,10 +7,16 @@
             </div>
             <div class="col-6">
                 <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
-                <p>Prirce: {{ apartment.price }}</p>
+                <p>Price: {{ apartment.price }} &euro;</p>
                 <p>Rooms: {{ apartment.rooms }}</p>
-                <p>Bed: {{ apartment.beds }}</p>
-                <p>Square: {{ apartment.square }}</p>
+                <p>Beds: {{ apartment.beds }}</p>
+                <p>Bathrooms: {{ apartment.bathrooms }}</p>
+                <p>Services:
+                    <span class="badge rounded-pill bg-danger" v-for="(service, index) in services" :key="index">
+                        {{ service.name }}
+                    </span>
+                </p>
+                <p>Square: {{ apartment.square }} m<sup>3</sup></p>
                 <p>Address: {{ apartment.address }}</p>
                 <router-link class="btn btn-danger mb-2 text-white" :to="{ name: 'contact', params: { id: apartment.id }}"> <span class="routerApartment d-none">{{ apartment.id }}</span>Contact Owner</router-link>
             </div>
@@ -36,7 +42,7 @@ import Axios from "axios";
     created() {
         const url = 'http://127.0.0.1:8000/api/v1/apartments/' + this.id;
         this.getApartment(url);
-        this.getServicesShow(url);
+        // this.getServicesShow(url);
     },
     mounted() {
     },
@@ -44,22 +50,23 @@ import Axios from "axios";
         getApartment(url){
             Axios.get(url).then(
                 (result) => {
-                this.apartment = result.data.results.data;
+                this.apartment = result.data.results.apartments;
+                this.services = result.data.results.apartments.services;
                 this.initializeMap()
             }).catch(error => console.log(error));
         },
-        getServicesShow: function () {
-            const url = "http://127.0.0.1:8000/api/v1/serviceshow";
-            Axios.get(url, {
-            })
-                .then((result) => {
-                    this.services = result.data.results.apartments;
-                    console.log(result.data.results.apartments);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
+        // getServicesShow: function () {
+        //     const url = "http://127.0.0.1:8000/api/v1/serviceshow";
+        //     Axios.get(url, {
+        //     })
+        //         .then((result) => {
+        //             this.services = result.data.results.apartments;
+        //             console.log(result.data.results.apartments);
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // },
         initializeMap() {
             console.log(this.apartment);
             this.map = tt.map({

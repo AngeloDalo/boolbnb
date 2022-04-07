@@ -6,13 +6,13 @@
                 <img class="w-50" :src="'storage/' + apartment.image" :alt="apartment.title"/>
             </div>
             <div class="col-6">
-                <h3 class="font-weight-bold text-danger">
-                    {{ apartment.title }}
-                </h3>
-            <p>Prirce: {{ apartment.price }}</p>
-            <p>Rooms: {{ apartment.rooms }}</p>
-            <p>Bed: {{ apartment.beds }}</p>
-            <p>Square: {{ apartment.square }}</p>
+                <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
+                <p>Price: {{ apartment.price }}</p>
+                <p>Rooms: {{ apartment.rooms }}</p>
+                <p>Beds: {{ apartment.beds }}</p>
+                <p>Bathrooms: {{ apartment.bathrooms }}</p>
+                <p>Square: {{ apartment.square }}</p>
+                <p>Address: {{ apartment.address }}</p>
             <router-link class="btn btn-danger mb-2"
                 :to="{
                     name: 'apartment',
@@ -29,18 +29,20 @@
                 <img class="w-50" :src="'storage/' + apartment.image" :alt="apartment.title"/>
             </div>
             <div class="col-6">
-                <h3 class="font-weight-bold text-danger"> {{ apartment.title }} </h3>
-                <p>Prirce: {{ apartment.price }}</p>
+                <h3 class="font-weight-bold text-danger">{{ apartment.title }}</h3>
+                <p>Price: {{ apartment.price }} &euro;</p>
                 <p>Rooms: {{ apartment.rooms }}</p>
-                <p>Bed: {{ apartment.beds }}</p>
-                <p>Square: {{ apartment.square }}</p>
+                <p>Beds: {{ apartment.beds }}</p>
+                <p>Bathrooms: {{ apartment.bathrooms }}</p>
+                <p>Square: {{ apartment.square }} m<sup>3</sup></p>
+                <p>Address: {{ apartment.address }}</p>
                 <router-link class="btn btn-danger mb-2"
                     :to="{
                         name: 'apartment',
                         params: { id: apartment.id },
                     }"
                 >
-                View
+                View for more details
                 </router-link>
             </div>
         </div>

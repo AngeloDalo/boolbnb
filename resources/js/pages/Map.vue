@@ -104,8 +104,8 @@
 
         <!-- mappa -->
         <div class="cont-apartments container-fluid py-4">
-            <div class="row p-3 overflow-master">
-                <div class="col-md-12 col-lg-6 overflow">
+            <div class="row p-3 overflow-master justify-content-center">
+                <div class="col-sm-12 col-md-12 col-lg-4 overflow">
                     <div class="" v-if="apartments.length == 0">
                         <!-- <img
                             class="written-boolbnb"
@@ -118,21 +118,21 @@
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-7">
+                            <div class="col-6">
                                 <img
                                     class="w-100 h-100 rounded-3"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
                             </div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
-                                <p>Prirce: {{ apartment.price }}</p>
+                                <p>Price: {{ apartment.price }} &euro;</p>
                                 <p>Rooms: {{ apartment.rooms }}</p>
                                 <p>Bed: {{ apartment.beds }}</p>
-                                <p>Square: {{ apartment.square }}</p>
+                                <p>Square: {{ apartment.square }} m<sup>3</sup></p>
                                 <router-link
                                     class="btn btn-danger mb-2"
                                     :to="{
@@ -151,21 +151,21 @@
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-7">
+                            <div class="col-6">
                                 <img
                                     class="w-100 h-100 rounded-3"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
                             </div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
-                                <p>Prirce: {{ apartment.price }}</p>
+                                <p>Price: {{ apartment.price }} &euro;</p>
                                 <p>Rooms: {{ apartment.rooms }}</p>
                                 <p>Bed: {{ apartment.beds }}</p>
-                                <p>Square: {{ apartment.square }}</p>
+                                <p>Square: {{ apartment.square }} m<sup>3</sup></p>
                                 <router-link
                                     class="btn btn-danger mb-2 text-light"
                                     :to="{
@@ -180,7 +180,7 @@
                     </div>
                 </div>
 
-                <div class="map col-md-12 col-lg-4" id="map" ref="mapRef"></div>
+                <div class="map d-none d-lg-block col-lg-4" id="map" ref="mapRef"></div>
             </div>
         </div>
     </div>
@@ -307,10 +307,7 @@ export default {
                             .addTo(this.map);
 
                         this.markers.push(marker);
-                        console.log("markers dentro foreach", this.markers);
                     });
-                    console.log("data", result.data.results);
-                    console.log("markers fuori foreach", this.markers);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -327,19 +324,16 @@ export default {
 }
 
 .overflow {
-    height: 400px;
+    height: 800px;
     overflow-y: scroll;
     overflow-y: auto;
 }
-
-::-webkit-scrollbar {
-     background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
- }
 
 .cont-apartments {
     background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
     background-repeat:no-repeat;
     background-size: cover;
+    height: calc(100vh - 262.32px);
 }
 
 div.form-outline {
@@ -365,5 +359,7 @@ div.form-outline {
 .background-serach {
     background-color: #032f6d;
 }
-
+// .overflow-master {
+//     height: 80vh;
+// }
 </style>

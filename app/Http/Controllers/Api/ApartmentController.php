@@ -26,8 +26,7 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::whereHas('sponsorship', function ($a) {
             $a->where('time', '>', 0);   
-        })->get();  
-
+        })->get();
         return response()->json([
             'response' => true,
             'results' =>  [
@@ -42,12 +41,12 @@ class ApartmentController extends Controller
 
     public function show($id)
     {
-        $apartment = Apartment::find($id);
+        $apartments = Apartment::with('services')->find($id);
         return response()->json([
             'response' => true,
-            'count' => $apartment ? 1 : 0,
+            'count' => $apartments ? 1 : 0,
             'results' =>  [
-                'data' => $apartment
+                'apartments' => $apartments
             ],
         ]);
     }
