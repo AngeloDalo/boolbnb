@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="content container col-xs-12 col-md-6">
-    <form method="POST" id="payment-form" action="">
+  <form action="{{route('admin.sponsorships.update', $apartment->id)}}" method="post">
         
         @csrf
-        @method('POST')
+        @method('PATCH')
         <section>
 
         <input type="hidden" name="apartment" value="{{$apartment->id}}">
@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-center align-items-center">
             @foreach ($sponsorships as $sponsorship )
                 <div class="card p-3 d-flex justify-content-center align-items-center">
-                <i class="fas fa-medal @if ($sponsorship->type === 'silver')
+                  <i class="fas fa-house @if ($sponsorship->type === 'silver')
                     silver
                     @elseif ($sponsorship->name === 'gold')
                     gold

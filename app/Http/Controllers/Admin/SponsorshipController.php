@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Sponsorship;
 use Braintree;
 use Carbon\Carbon;
+use App\User;
 
 class sponsorshipController extends Controller
 {
@@ -34,9 +35,20 @@ class sponsorshipController extends Controller
         abort(404);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        $user = User::find(Auth::id());
         $data = $request->all();
-        dd($request);
+        $apartment = Apartment::find($id);
+        $sponsorship = Sponsorship::find($data['Sponsorship']);
+        $pay_type = 'card';
+        // $pay_transaction =  $data['_token'];
+        $pay_transaction = 1;
+        
+    
+        $apartment->sponsorship()->attach($data['Sponsorship'], ['start_date' => Carbon::now(), 'end_date' => Carbon::now()->addHours($sponsorship['time']), 'pay_type'=>$pay_type, 'pay_transaction' => $pay_transaction ]);
+
+
+        return redirect()->route('admin.apartments.index');
     }
 }
