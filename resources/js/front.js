@@ -3,6 +3,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import App from './views/App';
+import Sponsor from './pages/Sponsor';
 import Apartment from './pages/Apartment';
 import Map from './pages/Map';
 import Contact from './pages/Contact';
@@ -28,6 +29,11 @@ const router = new VueRouter({
                 path: '/contatcs',
                 name: 'contact',
                 component: Contact
+            },
+            {
+                path: '/sponsor',
+                name: 'sponsor',
+                component: Sponsor
             },
         ]
 });

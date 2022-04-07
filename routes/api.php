@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/v1/apartments', 'Api\ApartmentController@index');
+Route::get('/v1/sponsor', 'Api\ApartmentController@sponsor');
 // Route::get('/posts/random', 'Api\PostController@inRandomOrder');
 Route::get('/v1/apartments/{id}', 'Api\ApartmentController@show');
 Route::get('/v1/services', 'Api\ServiceController@index');
