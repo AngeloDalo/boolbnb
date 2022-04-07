@@ -8,7 +8,6 @@ use App\Apartment;
 use App\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
-
 use Illuminate\Database\Eloquent\Builder;
 
 class ApartmentController extends Controller
@@ -24,13 +23,12 @@ class ApartmentController extends Controller
     }
     public function sponsor()
     {
-        $id = $apartment->with('apartments');
-        $apartment = Apartment::find($id);
+        $apartments = Apartment::all();
+        $apartments = $apartments->with('sponsorship')->where('id', '=', 'apartment_id');
         return response()->json([
             'response' => true,
-            'count' => $apartment ? 1 : 0,
             'results' =>  [
-                'data' => $apartment
+                'apartments' => $apartments
             ],
         ]);
     }

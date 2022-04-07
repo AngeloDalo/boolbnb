@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div class="container">
+    <div v-if="apartment" class="container">
         <div class="row border border-danger rounded-3 p-3">
             <div class="col-6">
                 <img class="w-100 rounded-3" :src="'http://127.0.0.1:8000/storage/' + apartment.image" :alt="apartment.title">
@@ -15,7 +15,6 @@
                 <router-link class="btn btn-danger mb-2 text-white" :to="{ name: 'contact', params: { id: apartment.id }}"> <span class="routerApartment d-none">{{ apartment.id }}</span>Contact Owner</router-link>
             </div>
         </div>
-        <!-- mappa -->
     </div>
     <div class="map" id="map" ref="mapRef"></div>
 </div>
@@ -60,17 +59,6 @@ import Axios from "axios";
             this.map.addControl(new tt.FullscreenControl());
             this.map.addControl(new tt.NavigationControl());
         }
-  
-        // initializeMap(lng, lat) {
-        //     this.map = tt.map({
-        //         key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
-        //         container: this.$refs.mapRef,
-        //         center: [lng, lat],
-        //         zoom: 9,
-        //     });
-        //     this.map.addControl(new tt.FullscreenControl());
-        //     this.map.addControl(new tt.NavigationControl());
-        // },
     }
   }
 </script>
