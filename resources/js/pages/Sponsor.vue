@@ -1,8 +1,9 @@
 <template>
+<div class="container-fluid">
     <div v-if="apartments.length == 0">
         <div class="row mb-5 border border-danger" v-for="apartment in apartments" :key="apartment.id">
             <div class="col-6">
-                <img class="w-100" :src="'storage/' + apartment.image" :alt="apartment.title"/>
+                <img class="w-50" :src="'storage/' + apartment.image" :alt="apartment.title"/>
             </div>
             <div class="col-6">
                 <h3 class="font-weight-bold text-danger">
@@ -25,7 +26,7 @@
     <div v-else>
         <div class="row mb-5 border border-danger" v-for="apartment in apartments" :key="apartment.id">
             <div class="col-6">
-                <img class="w-100" :src="'storage/' + apartment.image" :alt="apartment.title"/>
+                <img class="w-50" :src="'storage/' + apartment.image" :alt="apartment.title"/>
             </div>
             <div class="col-6">
                 <h3 class="font-weight-bold text-danger"> {{ apartment.title }} </h3>
@@ -44,6 +45,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
