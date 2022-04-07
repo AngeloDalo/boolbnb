@@ -24,14 +24,9 @@ class ApartmentController extends Controller
     }
     public function sponsor()
     {
-        // $apartments = Apartment::where('id', '>=', 1);
-        // $apartments = $apartments->join('sponsorships');
-        // $apartments = $apartments->get();
-        $apartments = DB::table('apartments')
-            ->join('sponsorships', 'sponsorships.id', '=', 'sponsorships.id')
-            ->join('apartment_sponsorship', 'apartment_sponsorship.apartment_id', '=', 'apartments.id')
-            // ->select('users.*', 'contacts.phone', 'orders.price')
-            ->get();
+        $apartments = Apartment::whereHas('sponsorship', function ($a) {
+            $a->where('time', '>', 0);   
+        })->get();  
 
         return response()->json([
             'response' => true,
