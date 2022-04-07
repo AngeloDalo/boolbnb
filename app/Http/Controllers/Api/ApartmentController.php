@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
 use App\Service;
+use App\Sponsorship;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,12 +24,19 @@ class ApartmentController extends Controller
     }
     public function sponsor()
     {
-        $apartments = Apartment::all();
-        $apartments = $apartments->with('sponsorship')->where('id', '=', 'apartment_id');
+        // $apartments = Apartment::where('id', '>=', 1);
+        // $apartments = $apartments->join('sponsorships');
+        // $apartments = $apartments->get();
+        $apartments = DB::table('apartments')
+            ->join('sponsorships', 'sponsorships.id', '=', 'sponsorships.id')
+            ->join('apartment_sponsorship', 'apartment_sponsorship.apartment_id', '=', 'apartments.id')
+            // ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();
+
         return response()->json([
             'response' => true,
             'results' =>  [
-                'apartments' => $apartments
+                'apartments' => $apartments,
             ],
         ]);
     }
