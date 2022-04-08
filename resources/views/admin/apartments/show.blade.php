@@ -38,6 +38,10 @@
             </div>
         </div>
         <a class="btn btn-danger mt-5" href="{{ route('admin.apartments.index') }}">My Apartments</a>
+        @if ($apartment->sponsorship()->get())
+        
+        @endif
+        
 
         <div class="mt-5">
             <table class="table table-striped">
@@ -45,8 +49,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Content</th>
-                        <th>Created at</th>
+                        <th>Content Message</th>
+                        <th>Date Message</th>
                     </tr>
                 </thead>
                 <tbody>
