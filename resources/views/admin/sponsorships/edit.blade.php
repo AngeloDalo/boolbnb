@@ -14,8 +14,8 @@
 
         <div class="d-flex justify-content-center align-items-center">
             @foreach ($sponsorships as $sponsorship )
-                <div class="card p-3 d-flex justify-content-center align-items-center">
-                  <i class="fas fa-house @if ($sponsorship->type === 'silver')
+                <div class="card p-3 d-flex justify-content-center align-items-center border border-danger me-1">
+                  <i class="fas fa-house" style="color:red" @if ($sponsorship->type === 'silver')
                     silver
                     @elseif ($sponsorship->name === 'gold')
                     gold
@@ -24,7 +24,7 @@
                     @endif card-img-top text-center"></i>
                     <div class="card-body">
                     <label for="{{$sponsorship->name}}">
-                        <p>Type: {{$sponsorship->name}}</p>
+                        <p class="font-weight-bold">Type: {{$sponsorship->name}}</p>
                         <p>Price: {{$sponsorship->price}}€</p>
                         <p>Duration: {{$sponsorship->time}} Hours</p>
                     </label>
@@ -34,12 +34,12 @@
             @endforeach
         </div>
 
-        <div class="bt-drop-in-wrapper">
+        <div class="mt-2 mb-2 bt-drop-in-wrapper">
             <div id="bt-dropin"></div>
         </div>
 
         <input id="nonce" name="payment_method_nonce" type="hidden" />
-        <div class="pay text-center"><button class="btn-pay" type="submit"><span>Pay now</span></button></div>
+        <div class="pay text-center"><button class="btn-pay btn-outline-danger" type="submit"><span>Pay now</span></button></div>
     </form>
 </div>
 
