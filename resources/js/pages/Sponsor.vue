@@ -6,7 +6,7 @@
 
         <div class="container-fluid py-4">
                 <div class="container row" v-if="apartments.length != 0">
-                        <div class="div col-4 me-2 border-danger border" v-for="apartment in apartments" :key="apartment.id">
+                        <div class="div col-3 me-2 border-danger border" v-for="apartment in apartments" :key="apartment.id">
                             <div class="div-img">
                                 <img class="card-img-top p-1" :src="'storage/' + apartment.image" :alt="apartment.title"/>
                                 <p class="price text-light px-3">{{ apartment.price }} &euro;</p>
