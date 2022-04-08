@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container show ps-5">
+    <div class="container show ps-5 pb-5">
         <div class="row">
             @if (session('status'))
                 <div class="alert alert-danger">
@@ -40,9 +40,8 @@
         <a class="btn btn-danger mt-5" href="{{ route('admin.apartments.index') }}">My Apartments</a>
         <a class="btn btn-danger mt-5" href="{{ url('/') }}">Home</a>
         @if ($apartment->sponsorship()->get())
-        
         @endif
-        
+
 
         <div class="mt-5 border border-danger rounded-3 p-3">
             <div>

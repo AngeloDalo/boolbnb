@@ -10,7 +10,7 @@
                 v-if="apartments.length != 0"
             >
                 <div
-                    class="div col-sm-12 col-md-4 col-lg-2 me-2 border-danger border"
+                    class="card col-sm-12 col-md-4 col-lg-2 me-2 border-danger border"
                     v-for="apartment in apartments"
                     :key="apartment.id"
                 >
@@ -52,18 +52,16 @@
                             ><span class="span-sponsor">Square:</span>
                             {{ apartment.square }} m<sup>3</sup></span
                         >
-                        <div class="mt-2">
-                            <router-link
-                                class="btn btn-danger mb-2"
-                                :to="{
-                                    name: 'apartment',
-                                    params: { id: apartment.id },
-                                }"
-                            >
-                                View
-                            </router-link>
-                        </div>
                     </div>
+                    <router-link
+                        class="btn btn-danger mb-2 text-light"
+                        :to="{
+                            name: 'apartment',
+                            params: { id: apartment.id },
+                        }"
+                    >
+                        View
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -101,7 +99,7 @@ export default {
 
 <style>
 .cont-tot {
-    background-color: #032f6d0a;
+    background-image: url("https://wallpapercave.com/wp/wp4069428.jpg");
     height: 100vh;
 }
 

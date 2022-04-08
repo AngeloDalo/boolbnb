@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table">
+                <table class="table border border-danger">
                     <thead>
                         <tr class="table-danger">
                             <th>Title</th>
@@ -44,7 +44,8 @@
                                     <a class="btn btn-danger"
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Edit</a>
                                 </td>
-                                <td><a class="btn btn-danger" href="{{route('admin.sponsorships.edit', $apartment->id)}}">Sponsorhip</a></td>
+                                <td><a class="btn btn-danger"
+                                        href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorhip</a></td>
                             </tr>
                         @endforeach
                     </tbody>
