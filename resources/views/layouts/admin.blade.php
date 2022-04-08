@@ -30,11 +30,56 @@
       style="position: fixed; top: 0; width: 100%">
       <a href="{{ url('/') }}"><img src="{{ asset('img/logoBoolBnb.png') }}" alt="logo" class=""
           style="width: 50px"></a>
-        
-      <button type="button" class="btn btn-danger dropdown-toggle me-2" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false" id="bottone-navbar">
-        Action
-      </button>
+
+      <ul class="list-unstyled me-5">
+        <li class="nav-item dropdown">
+          <a id="bottone-navbar" class="nav-link dropdown-toggle btn btn-danger text-white" href="#" role="button" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" v-pre="">
+            Admin
+          </a>
+  
+          <div class="dropdown-menu dropdown-menu-right me-5" aria-labelledby="navbarDropdown" style="left: -34px">
+            <a class="dropdown-item" href="{{ url('/') }}">
+              Home
+            </a>
+            <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">
+              My apartments
+            </a>
+            <a class="dropdown-item" href="{{ route('admin.apartments.create') }}">
+              Add apartment
+            </a>
+            <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
+              onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
+              Logout
+            </a>
+  
+           <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                                                                                           document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
+          </div>
+        </li>
+
+      </ul>
+      {{-- <div class="btn-group me-2 dropdown" >
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Action
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div> --}}
     </nav>
     <main>
       <div class="container-fluid" style="padding-top: 6em;">
