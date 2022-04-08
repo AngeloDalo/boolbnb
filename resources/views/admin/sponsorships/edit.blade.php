@@ -20,12 +20,12 @@
                     @elseif ($sponsorship->name === 'gold')
                     gold
                     @else
-                    platinum
+                    bronze
                     @endif card-img-top text-center"></i>
                     <div class="card-body">
                     <label for="{{$sponsorship->name}}">
-                        <p>Type: {{$sponsorship->name}}</p>
-                        <p>Price: {{$sponsorship->price}}€</p>
+                        <p class="text-center text-uppercase">{{$sponsorship->name}}</p>
+                        <p>Price:{{$sponsorship->price}}€</p>
                         <p>Duration: {{$sponsorship->time}} Hours</p>
                     </label>
                     </div>
