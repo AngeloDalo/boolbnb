@@ -38,13 +38,13 @@
                                 <td>{{ $apartment->price }}&euro;</td>
                                 <td>{{ $apartment->created_at }}</td>
                                 <td>{{ $apartment->updated_at }}</td>
-                                <td><a class="btn btn-danger"
+                                <td><a class="btn btn-danger text-white"
                                         href="{{ route('admin.apartments.show', $apartment->slug) }}">View</a></td>
                                 <td>
-                                    <a class="btn btn-danger"
+                                    <a class="btn btn-danger text-white"
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Edit</a>
                                 </td>
-                                <td><a class="btn btn-danger"
+                                <td><a class="btn btn-danger text-white"
                                         href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorhip</a></td>
                             </tr>
                         @endforeach

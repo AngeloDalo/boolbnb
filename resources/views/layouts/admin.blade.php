@@ -31,7 +31,7 @@
       <a href="{{ url('/') }}"><img src="{{ asset('img/logoBoolBnb.png') }}" alt="logo" class=""
           style="width: 50px"></a>
 
-      <ul class="list-unstyled me-5">
+      <ul class="list-unstyled me-5 d-lg-none">
         <li class="nav-item dropdown">
           <a id="bottone-navbar" class="nav-link dropdown-toggle btn btn-danger text-white" href="#" role="button" data-bs-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false" v-pre="">
@@ -54,11 +54,6 @@
               Logout
             </a>
   
-           <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                                                                                           document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                  </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
