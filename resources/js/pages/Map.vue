@@ -27,7 +27,7 @@
                 </div>
 
                 <div>
-                    <div class="d-flex justify-content-evenly my-3">
+                    <div class="row d-flex justify-content-evenly my-3">
                         <div class="col-auto my-1">
                             <label class="text-danger">Distance</label>
                             <select
@@ -68,6 +68,7 @@
                                 <option value="5">5+</option>
                             </select>
                         </div>
+                    <div class="col-auto">
                         <button
                             type="button"
                             class="btn btn-outline-danger"
@@ -75,6 +76,7 @@
                         >
                             <i class="bi bi-filter-circle"></i> Filter
                         </button>
+                    </div>
                     </div>
 
                     <div
@@ -361,7 +363,7 @@ div.form-outline {
     background-color: #032f6d;
 }
 .overflow-master {
-    height: 100vh;
+    height: 100%;
 }
 .div-img {
     position: relative;
@@ -373,5 +375,10 @@ div.form-outline {
     font-size: 1.5em;
     background: rgba(0, 0, 0, 0.418);
     border-radius: 20px;
+}
+@media only screen and (max-width: 991px) {
+    .cont-apartments {
+        height: 100%;
+    }
 }
 </style>
