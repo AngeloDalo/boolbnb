@@ -26,7 +26,7 @@
                             <th>Created at</th>
                             <th>Updated at</th>
                             <th>View</th>
-                            <th>Update</th>
+                            <th>Edit</th>
                             <th>Sponsorship</th>
                         </tr>
                     </thead>
@@ -42,7 +42,7 @@
                                         href="{{ route('admin.apartments.show', $apartment->slug) }}">View</a></td>
                                 <td>
                                     <a class="btn btn-danger"
-                                        href="{{ route('admin.apartments.edit', $apartment->slug) }}">Update</a>
+                                        href="{{ route('admin.apartments.edit', $apartment->slug) }}">Edit</a>
                                 </td>
                                 <td><a class="btn btn-danger" href="{{route('admin.sponsorships.edit', $apartment->id)}}">Sponsorhip</a></td>
                             </tr>
