@@ -26,11 +26,13 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ps-3">
-            <a href="{{ url('/') }}"><img src="{{ asset('img/logoBoolBnb.png') }}" alt="logo" class="" style="width: 50px"></a>
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ps-3"
+            style="position: fixed; top: 0; width: 100vw">
+            <a href="{{ url('/') }}"><img src="{{ asset('img/logoBoolBnb.png') }}" alt="logo"
+                    class="" style="width: 50px"></a>
         </nav>
         <main>
-            <div class="container-fluid mt-5">
+            <div class="container-fluid" style="margin-top: 6em">
                 <div class='row'>
                     <nav id='sidebarMenu'
                         class='col-sm-12 col-md-12 col-lg-2 d-md-block bg-light sidebar collapse me-5'>
