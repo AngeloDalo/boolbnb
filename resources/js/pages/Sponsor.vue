@@ -4,7 +4,7 @@
             <h1 class="text-danger my-3">SELECTED FOR YOU</h1>
         </div>
 
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-4 bg-img testing">
             <div
                 class="row justify-content-center"
                 v-if="apartments.length != 0"
@@ -101,6 +101,8 @@ export default {
 .cont-tot {
     background-image: url("https://wallpapercave.com/wp/wp4069428.jpg");
     height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .title-sponsor {
@@ -127,5 +129,11 @@ export default {
 .span-sponsor {
     font-weight: bold;
     color: #032f6d;
+}
+
+@media only screen and (max-width: 991px) {
+    .cont-tot {
+        height: 100%;
+    }
 }
 </style>
