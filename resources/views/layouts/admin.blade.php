@@ -34,7 +34,8 @@
                 <div class='row'>
                     <nav id='sidebarMenu'
                         class='col-sm-12 col-md-12 col-lg-2 d-md-block bg-light sidebar collapse me-5'>
-                        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light border border-danger rounded-3">
+                        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light border border-danger rounded-3"
+                            style="position: fixed; height: 80%">
                             <ul class="nav nav-pills flex-column mb-auto">
                                 <li class="nav-item">
                                     <a href="{{ url('/') }}" class="nav-link text-danger" aria-current="page">
