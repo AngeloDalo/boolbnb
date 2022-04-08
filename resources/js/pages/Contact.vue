@@ -35,6 +35,7 @@
             </div>
 
             <button type="submit" class="btn btn-danger text-white">{{ sending ? "Sending mail..." : "Send" }}</button>
+        <button type="text" class="btn btn-danger text-white"><a href="http://127.0.0.1:8000/" class="text-decoration-none text-white">Back Home</a></button>
         </form>
     </div>
   </div>

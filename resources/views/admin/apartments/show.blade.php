@@ -43,7 +43,10 @@
         @endif
         
 
-        <div class="mt-5">
+        <div class="mt-5 border border-danger rounded-3 p-3">
+            <div>
+                <h1 class="text-danger">Messages</h1>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>

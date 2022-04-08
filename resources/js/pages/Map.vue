@@ -118,12 +118,13 @@
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-6">
+                            <div class="col-6 div-img">
                                 <img
-                                    class="w-100 h-100 rounded-3"
+                                    class="w-100 h-100 rounded-3 card-img-top p-1"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
+                                <p class="price text-light px-3">{{ apartment.price }} &euro;</p>
                             </div>
                             <div class="col-6">
                                 <h3 class="font-weight-bold text-danger">
@@ -151,18 +152,18 @@
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-6">
+                            <div class="col-6 div-img">
                                 <img
                                     class="w-100 h-100 rounded-3"
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
+                                <p class="price text-light px-3">{{ apartment.price }} &euro;</p>
                             </div>
                             <div class="col-6">
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
-                                <p>Price: {{ apartment.price }} &euro;</p>
                                 <p>Rooms: {{ apartment.rooms }}</p>
                                 <p>Bed: {{ apartment.beds }}</p>
                                 <p>Square: {{ apartment.square }} m<sup>3</sup></p>
@@ -361,5 +362,16 @@ div.form-outline {
 }
 .overflow-master {
     height: 100vh;
+}
+.div-img {
+    position: relative;
+}
+.price {
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+    font-size: 1.5em;
+    background: rgba(0, 0, 0, 0.418);
+    border-radius: 20px;
 }
 </style>

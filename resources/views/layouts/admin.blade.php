@@ -26,8 +26,8 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <img src="{{ asset('img/logoBoolBnb.png') }}" alt="logo" class="" style="width: 50px">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ps-3">
+            <a href="{{ url('/') }}"><img src="{{ asset('img/logoBoolBnb.png') }}" alt="logo" class="" style="width: 50px"></a>
         </nav>
         <main>
             <div class="container-fluid mt-5">
@@ -44,21 +44,15 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link text-danger">
-                                        <i class="bi bi-bar-chart-line" style="color:#03306D"></i>
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="{{ route('admin.apartments.index') }}" class="nav-link text-danger">
                                         <i class="bi bi-grid" style="color:#03306D"></i>
-                                        My apartment
+                                        My apartments
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.apartments.create') }}" class="nav-link text-danger">
                                         <i class="bi bi-plus-square" style="color:#03306D"></i>
-                                        Create apartment
+                                        Add a new apartment
                                     </a>
                                 </li>
 

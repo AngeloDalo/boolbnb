@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Apartment;
 
 class HomeController extends Controller
 {
@@ -14,7 +16,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+        return view('admin.apartments.index', ['apartments' => $apartments]);
     }
 
     /**
