@@ -32,10 +32,10 @@
                     class="" style="width: 50px"></a>
         </nav>
         <main>
-            <div class="container-fluid" style="margin-top: 6em">
+            <div class="container-fluid" style="padding-top: 6em;">
                 <div class='row'>
-                    <nav id='sidebarMenu'
-                        class='col-sm-12 col-md-12 col-lg-2 d-md-block bg-light sidebar collapse me-5'>
+                    <nav id='sidebarMenu' class='col-sm-12 col-md-12 col-lg-2 d-md-block bg-light sidebar collapse me-5'
+                        style="background-color: green;">
                         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light border border-danger rounded-3"
                             style="position: fixed; height: 80%">
                             <ul class="nav nav-pills flex-column mb-auto">
