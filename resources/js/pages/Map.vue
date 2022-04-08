@@ -103,7 +103,7 @@
         </div>
 
         <!-- mappa -->
-        <div class="cont-apartments container-fluid py-4">
+        <div class="cont-apartments container-fluid">
             <div class="row p-3 overflow-master justify-content-center">
                 <div class="col-sm-12 col-md-12 col-lg-4 overflow">
                     <div class="" v-if="apartments.length == 0">
@@ -333,7 +333,7 @@ export default {
     background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
     background-repeat:no-repeat;
     background-size: cover;
-    height: calc(100vh - 262.32px);
+    height: 100vh;
 }
 
 div.form-outline {
@@ -359,7 +359,7 @@ div.form-outline {
 .background-serach {
     background-color: #032f6d;
 }
-// .overflow-master {
-//     height: 80vh;
-// }
+.overflow-master {
+    height: 100vh;
+}
 </style>

@@ -70,6 +70,7 @@ export default {
 <style>
 .cont-tot {
     background-color: #032f6d0a;
+    height: 100vh;
 }
 
 .title-sponsor {
