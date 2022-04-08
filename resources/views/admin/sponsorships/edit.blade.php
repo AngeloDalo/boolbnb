@@ -24,7 +24,7 @@
                     @endif card-img-top text-center"></i>
                     <div class="card-body">
                     <label for="{{$sponsorship->name}}">
-                        <p class="font-weight-bold">Type: {{$sponsorship->name}}</p>
+                        <p>Type:{{$sponsorship->name}}</p>
                         <p>Price: {{$sponsorship->price}}€</p>
                         <p>Duration: {{$sponsorship->time}} Hours</p>
                     </label>
