@@ -68,15 +68,15 @@
                                 <option value="5">5+</option>
                             </select>
                         </div>
-                    <div class="col-auto">
-                        <button
-                            type="button"
-                            class="btn btn-outline-danger"
-                            @click="viewServices = !viewServices"
-                        >
-                            <i class="bi bi-filter-circle"></i> Filter
-                        </button>
-                    </div>
+                        <div class="col-auto">
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger"
+                                @click="viewServices = !viewServices"
+                            >
+                                <i class="bi bi-filter-circle"></i> Filter
+                            </button>
+                        </div>
                     </div>
 
                     <div
@@ -107,7 +107,7 @@
         <!-- mappa -->
         <div class="cont-apartments container-fluid">
             <div class="row p-3 overflow-master justify-content-center">
-                <div class="col-sm-12 col-md-12 col-lg-4 overflow">
+                <div class="col-sm-12 col-md-12 col-lg-6 overflow">
                     <div class="" v-if="apartments.length == 0">
                         <h2>Start your search</h2>
                     </div>
@@ -123,7 +123,9 @@
                                     :src="'storage/' + apartment.image"
                                     :alt="apartment.title"
                                 />
-                                <p class="price text-light px-3">{{ apartment.price }} &euro;</p>
+                                <p class="price text-light px-3">
+                                    {{ apartment.price }} &euro;
+                                </p>
                             </div>
                             <div class="col-6">
                                 <h3 class="font-weight-bold text-danger">
@@ -131,7 +133,9 @@
                                 </h3>
                                 <p>Rooms: {{ apartment.rooms }}</p>
                                 <p>Bed: {{ apartment.beds }}</p>
-                                <p>Square: {{ apartment.square }} m<sup>3</sup></p>
+                                <p>
+                                    Square: {{ apartment.square }} m<sup>3</sup>
+                                </p>
                                 <router-link
                                     class="btn btn-danger mb-2 text-light"
                                     :to="{
@@ -145,8 +149,9 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="map d-none d-lg-block col-lg-4" id="map" ref="mapRef"></div>
+                <div class="col-6 d-none d-lg-block col-lg-6">
+                    <div class="map" id="map" ref="mapRef"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -230,7 +235,7 @@ export default {
                 let lnglat = result.results[0].position;
                 this.moveMap(lnglat);
                 this.getApartment();
-                this.markers.forEach(marker => {
+                this.markers.forEach((marker) => {
                     marker.remove();
                 });
             }
@@ -290,14 +295,14 @@ export default {
 }
 
 .overflow {
-    height: 800px;
+    height: 400px;
     overflow-y: scroll;
     overflow-y: auto;
 }
 
 .cont-apartments {
     background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
 }
