@@ -44,8 +44,11 @@
                                     <a class="btn btn-danger text-white"
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Edit</a>
                                 </td>
-                                <td><a class="btn btn-danger text-white"
-                                        href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorhip</a></td>
+                                @if ($apartment->end_date)
+                                <td><span>Sponsorship end: </span>{{ $apartment->end_date }}</td> 
+                                @else 
+                                    <td><a class="btn btn-danger text-white" href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorship</a></td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
