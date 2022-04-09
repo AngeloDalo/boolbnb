@@ -292,11 +292,11 @@ export default {
 <style lang="scss" scoped>
 #map {
     margin-left: 7em;
-    height: 400px;
+    height: 72vh;
 }
 
 .overflow {
-    height: 450px;
+    height: 72vh;
     overflow-y: scroll;
     overflow-y: auto;
     
@@ -306,7 +306,7 @@ export default {
     background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    
 }
 
 div.form-outline {
@@ -333,8 +333,8 @@ div.form-outline {
     background-color: #032f6d;
 }
 .overflow-master {
-    height: 100vh;
-    padding: 100px 100px 0 100px;
+    
+    padding: 50px 100px 50px 100px;
 }
 .div-img {
     position: relative;
