@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
 <div class="content container col-xs-12 col-md-6">
-  <form action="{{route('admin.sponsorships.update', $apartment->id)}}" method="post">
+    <form method="post" id="payment-form" action="{{route('admin.sponsorships.update', $apartment->id)}}">
         
         @csrf
         @method('PATCH')
@@ -15,17 +15,17 @@
         <div class="d-flex justify-content-center align-items-center">
             @foreach ($sponsorships as $sponsorship )
                 <div class="card p-3 d-flex justify-content-center align-items-center">
-                  <i class="fas fa-house @if ($sponsorship->type === 'silver')
+                <i class="fas fa-medal @if ($sponsorship->type === 'silver')
                     silver
                     @elseif ($sponsorship->name === 'gold')
                     gold
                     @else
-                    bronze
+                    platinum
                     @endif card-img-top text-center"></i>
                     <div class="card-body">
                     <label for="{{$sponsorship->name}}">
-                        <p class="text-center text-uppercase">{{$sponsorship->name}}</p>
-                        <p>Price:{{$sponsorship->price}}€</p>
+                        <p>Type: {{$sponsorship->name}}</p>
+                        <p>Price: {{$sponsorship->price}}€</p>
                         <p>Duration: {{$sponsorship->time}} Hours</p>
                     </label>
                     </div>
