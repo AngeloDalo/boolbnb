@@ -100,7 +100,7 @@ export default {
 <style>
 .cont-tot {
     background-image: url("https://wallpapercave.com/wp/wp4069428.jpg");
-    height: 100%;
+    height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
 }

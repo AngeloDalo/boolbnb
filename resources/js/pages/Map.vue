@@ -106,7 +106,7 @@
 
         <!-- mappa -->
         <div class="cont-apartments container-fluid">
-            <div class="row p-3 overflow-master justify-content-center">
+            <div class="row overflow-master justify-content-center">
                 <div class="col-sm-12 col-md-12 col-lg-6 overflow">
                     <div class="" v-if="apartments.length == 0">
                         <h2>Start your search</h2>
@@ -117,7 +117,7 @@
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
-                            <div class="col-6 div-img">
+                            <div class="col-lg-6 col-12 div-img">
                                 <img
                                     class="w-100 h-100 rounded-3"
                                     :src="'storage/' + apartment.image"
@@ -127,14 +127,15 @@
                                     {{ apartment.price }} &euro;
                                 </p>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6 col-12">
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
-                                <p>Rooms: {{ apartment.rooms }}</p>
-                                <p>Bed: {{ apartment.beds }}</p>
+                                <p><span class="fw-bold text-uppercase">Address:</span> {{ apartment.address }}</p>
+                                <p><span class="fw-bold text-uppercase">Rooms:</span> {{ apartment.rooms }}</p>
+                                <p><span class="fw-bold text-uppercase">Bed:</span> {{ apartment.beds }}</p>
                                 <p>
-                                    Square: {{ apartment.square }} m<sup>3</sup>
+                                    <span class="fw-bold text-uppercase">Square:</span> {{ apartment.square }} m<sup>3</sup>
                                 </p>
                                 <router-link
                                     class="btn btn-danger mb-2 text-light"
@@ -295,9 +296,10 @@ export default {
 }
 
 .overflow {
-    height: 400px;
+    height: 450px;
     overflow-y: scroll;
     overflow-y: auto;
+    
 }
 
 .cont-apartments {
@@ -331,7 +333,8 @@ div.form-outline {
     background-color: #032f6d;
 }
 .overflow-master {
-    height: 100%;
+    height: 100vh;
+    padding: 100px 100px 0 100px;
 }
 .div-img {
     position: relative;
