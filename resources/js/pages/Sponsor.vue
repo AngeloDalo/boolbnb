@@ -10,7 +10,7 @@
                 v-if="apartments.length != 0"
             >
                 <div
-                    class="card col-sm-12 col-md-4 col-lg-2 me-2 border-danger border"
+                    class="card col-sm-12 col-md-4 col-lg-2 me-2 border-danger border mb-3"
                     v-for="apartment in apartments"
                     :key="apartment.id"
                 >
@@ -100,7 +100,7 @@ export default {
 <style>
 .cont-tot {
     background-image: url("https://wallpapercave.com/wp/wp4069428.jpg");
-    height: 100%;
+    height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
 }

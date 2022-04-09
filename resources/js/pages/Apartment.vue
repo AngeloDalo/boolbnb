@@ -1,9 +1,9 @@
 <template>
     <div class="container-fluid">
-        <div class="row pt-5 px-2">
+        <div class="single-apartment row px-2">
             <div
                 v-if="apartment"
-                class="col-6 border border-danger rounded-3 pt-4"
+                class="col-md-12 col-lg-6 border border-danger rounded-3 p-3 mb-3"
             >
                 <div class="row">
                     <div class="div-img col-8">
@@ -34,7 +34,7 @@
                         <p>
                             Services:
                             <span
-                                class="badge rounded-pill bg-danger"
+                                class="badge rounded-pill bg-danger mb-3"
                                 v-for="(service, index) in services"
                                 :key="index"
                             >
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
                 <div class="map" id="map" ref="mapRef"></div>
             </div>
         </div>
@@ -127,5 +127,9 @@ export default {
 #map {
     height: 400px;
     width: 100%;
+}
+
+.single-apartment {
+    padding-top: 5%;
 }
 </style>
