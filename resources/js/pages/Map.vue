@@ -29,7 +29,7 @@
                 <div>
                     <div class="row d-flex justify-content-evenly my-3">
                         <div class="col-auto my-1">
-                            <label class="text-danger">Distance</label>
+                            <label class="text-white">Distance</label>
                             <select
                                 class="custom-select mr-sm-2"
                                 id="inlineFormCustomSelect"
@@ -41,7 +41,7 @@
                             </select>
                         </div>
                         <div class="col-auto my-1">
-                            <label class="text-danger">Number of rooms</label>
+                            <label class="text-white">Number of rooms</label>
                             <select
                                 class="custom-select mr-sm-2"
                                 id="inlineFormCustomSelect"
@@ -55,7 +55,7 @@
                             </select>
                         </div>
                         <div class="col-auto my-1">
-                            <label class="text-danger">Number of beds</label>
+                            <label class="text-white">Number of beds</label>
                             <select
                                 class="custom-select mr-sm-2"
                                 id="inlineFormCustomSelect"
@@ -71,7 +71,7 @@
                         <div class="col-auto">
                             <button
                                 type="button"
-                                class="btn btn-outline-danger"
+                                class="btn btn-outline-light"
                                 @click="viewServices = !viewServices"
                             >
                                 <i class="bi bi-filter-circle"></i> Filter
@@ -88,7 +88,7 @@
                             v-for="(service, index) in services"
                             :key="index"
                         >
-                            <label class="text-danger" :for="service.id">{{
+                            <label class="text-white" :for="service.id">{{
                                 service.name
                             }}</label>
                             <input
@@ -108,12 +108,15 @@
         <div class="cont-apartments container-fluid">
             <div class="row overflow-master justify-content-center">
                 <div class="col-sm-12 col-md-12 col-lg-6 overflow">
-                    <div class="" v-if="apartments.length == 0">
-                        <h2>Start your search</h2>
+                    <div
+                        class="w-100 h-100 d-flex justify-content-center align-items-center"
+                        v-if="apartments.length == 0"
+                    >
+                        <h2 class="text-danger fw-bold">START YOUR SEARCH</h2>
                     </div>
                     <div v-else>
                         <div
-                            class="row mb-5 border border-danger rounded-3 p-3 bg-light"
+                            class="shadow row mb-5 border border-danger rounded-3 p-3 bg-light"
                             v-for="apartment in apartments"
                             :key="apartment.id"
                         >
@@ -131,11 +134,29 @@
                                 <h3 class="font-weight-bold text-danger">
                                     {{ apartment.title }}
                                 </h3>
-                                <p><span class="fw-bold text-uppercase">Address:</span> {{ apartment.address }}</p>
-                                <p><span class="fw-bold text-uppercase">Rooms:</span> {{ apartment.rooms }}</p>
-                                <p><span class="fw-bold text-uppercase">Bed:</span> {{ apartment.beds }}</p>
                                 <p>
-                                    <span class="fw-bold text-uppercase">Square:</span> {{ apartment.square }} m<sup>3</sup>
+                                    <span class="fw-bold text-uppercase"
+                                        >Address:</span
+                                    >
+                                    {{ apartment.address }}
+                                </p>
+                                <p>
+                                    <span class="fw-bold text-uppercase"
+                                        >Rooms:</span
+                                    >
+                                    {{ apartment.rooms }}
+                                </p>
+                                <p>
+                                    <span class="fw-bold text-uppercase"
+                                        >Bed:</span
+                                    >
+                                    {{ apartment.beds }}
+                                </p>
+                                <p>
+                                    <span class="fw-bold text-uppercase"
+                                        >Square:</span
+                                    >
+                                    {{ apartment.square }} m<sup>3</sup>
                                 </p>
                                 <router-link
                                     class="btn btn-danger mb-2 text-light"
@@ -293,25 +314,33 @@ export default {
 #map {
     margin-left: 7em;
     height: 72vh;
+    box-shadow: 5px 10px 8px #888888 !important;
 }
 
 .overflow {
     height: 72vh;
-    overflow-y: scroll;
     overflow-y: auto;
-    
+}
+
+::-webkit-scrollbar {
+    background-color: #f8fafc;
 }
 
 .cont-apartments {
-    background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
+    // background-image: url("https://www.wishinnovation.it/wp-content/uploads/2021/12/PNRR-Turismo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    
 }
 
 div.form-outline {
     width: 60%;
 }
+
+.shadow {
+    box-shadow: 5px 10px 8px #888888 !important;
+    margin: 0 5px;
+}
+
 .btn-search {
     width: 10%;
 }
@@ -333,7 +362,6 @@ div.form-outline {
     background-color: #032f6d;
 }
 .overflow-master {
-    
     padding: 50px 100px 50px 100px;
 }
 .div-img {

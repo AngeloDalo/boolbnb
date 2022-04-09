@@ -1,47 +1,43 @@
 <template>
     <div class="container-fluid">
         <div class="single-apartment row px-2">
-            <div
-                v-if="apartment"
-                class="col-lg-6 col-12 border border-danger rounded-3 py-4 card"
-            >
+            <div v-if="apartment" class="col-lg-12 col-12 rounded-3 py-4 mb-2">
                 <div class="row">
-                    <div class="div-img col-lg-8 col-12">
+                    <h3
+                        class="col-12 text-uppercase fs-1 text-center py-2 font-weight-bold text-danger"
+                    >
+                        {{ apartment.title }}
+                    </h3>
+                    <div class="div-img col-12 text-center">
                         <img
-                            class="w-100 h-100 rounded-3"
+                            class="shadow w-50 rounded-3"
                             :src="
                                 'http://127.0.0.1:8000/storage/' +
                                 apartment.image
                             "
                             :alt="apartment.title"
                         />
-                        <p class="price text-light px-3">
+                    </div>
+                    <div class="col-12 text-center">
+                        <p class="mt-5">
+                            <span class="fw-bold text-uppercase">Price:</span>
                             {{ apartment.price }} &euro;
                         </p>
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <h3 class="font-weight-bold text-danger">
-                            {{ apartment.title }}
-                        </h3>
-                        <p class="mt-5">
-                            <span class="fw-bold text-uppercase">Address:</span>
-                            {{ apartment.address }}
-                        </p>
 
-                        <span class="d-block"
+                        <span class=""
                             ><span class="fw-bold text-uppercase">Rooms:</span>
                             {{ apartment.rooms }},</span
-                        ><br />
-                        <span class="d-block"
+                        >
+                        <span class=""
                             ><span class="fw-bold text-uppercase">Beds:</span>
-                            {{ apartment.beds }}, </span
-                        ><br />
-                        <span class="d-block"
+                            {{ apartment.beds }},
+                        </span>
+                        <span class=""
                             ><span class="fw-bold text-uppercase"
                                 >Bathrooms:</span
                             >
-                            {{ apartment.bathrooms }}, </span
-                        ><br />
+                            {{ apartment.bathrooms }},
+                        </span>
                         <span
                             ><span class="fw-bold text-uppercase">Square:</span>
                             {{ apartment.square }}m<sup>3</sup></span
@@ -50,9 +46,9 @@
                             <span class="fw-bold text-uppercase"
                                 >Services:</span
                             >
-                            <br />
+
                             <span
-                                class="badge rounded-pill bg-danger mb-3"
+                                class="badge rounded-pill bg-danger mb-3 me-2"
                                 v-for="(service, index) in services"
                                 :key="index"
                             >
@@ -72,10 +68,14 @@
                             }}</span
                             >Contact Owner</router-link
                         >
+                        <p class="mt-5">
+                            <span class="fw-bold text-uppercase">Address:</span>
+                            {{ apartment.address }}
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-12 col-12">
                 <div class="map" id="map" ref="mapRef"></div>
             </div>
         </div>
@@ -143,11 +143,11 @@ export default {
 
 <style lang="scss" scoped>
 #map {
-    height: 400px;
+    height: 72vh;
     width: 100%;
 }
 
-.single-apartment {
-    padding-top: 5%;
+.shadow {
+    box-shadow: 5px 10px 8px #888888 !important;
 }
 </style>

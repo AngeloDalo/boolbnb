@@ -10,7 +10,7 @@
                 v-if="apartments.length != 0"
             >
                 <div
-                    class="card col-sm-12 col-md-4 col-lg-2 me-2 border-danger border mb-3"
+                    class="shadow card col-sm-12 col-md-4 col-lg-3 border-danger border m-3"
                     v-for="apartment in apartments"
                     :key="apartment.id"
                 >
@@ -99,7 +99,6 @@ export default {
 
 <style>
 .cont-tot {
-    background-image: url("https://wallpapercave.com/wp/wp4069428.jpg");
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -115,6 +114,10 @@ export default {
 
 .p-sponsor {
     margin-bottom: 0.2em !important;
+}
+
+.shadow {
+    box-shadow: 5px 10px 8px #888888 !important;
 }
 
 .price {
