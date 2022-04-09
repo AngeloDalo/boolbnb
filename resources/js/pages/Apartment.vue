@@ -3,10 +3,10 @@
         <div class="single-apartment row px-2">
             <div
                 v-if="apartment"
-                class="col-md-12 col-lg-6 border border-danger rounded-3 p-3 mb-3"
+                class="col-lg-6 col-12 border border-danger rounded-3 py-4 card"
             >
                 <div class="row">
-                    <div class="div-img col-8">
+                    <div class="div-img col-lg-8 col-12">
                         <img
                             class="w-100 h-100 rounded-3"
                             :src="
@@ -19,20 +19,38 @@
                             {{ apartment.price }} &euro;
                         </p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-12">
                         <h3 class="font-weight-bold text-danger">
                             {{ apartment.title }}
                         </h3>
-                        <p>Address: {{ apartment.address }}</p>
+                        <p class="mt-5">
+                            <span class="fw-bold text-uppercase">Address:</span>
+                            {{ apartment.address }}
+                        </p>
 
-                        <span>Rooms: {{ apartment.rooms }}, </span>
-                        <span>Beds: {{ apartment.beds }}, </span>
-                        <span>Bathrooms: {{ apartment.bathrooms }}, </span>
+                        <span class="d-block"
+                            ><span class="fw-bold text-uppercase">Rooms:</span>
+                            {{ apartment.rooms }},</span
+                        ><br />
+                        <span class="d-block"
+                            ><span class="fw-bold text-uppercase">Beds:</span>
+                            {{ apartment.beds }}, </span
+                        ><br />
+                        <span class="d-block"
+                            ><span class="fw-bold text-uppercase"
+                                >Bathrooms:</span
+                            >
+                            {{ apartment.bathrooms }}, </span
+                        ><br />
                         <span
-                            >Square: {{ apartment.square }} m<sup>3</sup></span
+                            ><span class="fw-bold text-uppercase">Square:</span>
+                            {{ apartment.square }}m<sup>3</sup></span
                         >
-                        <p>
-                            Services:
+                        <p class="mt-3">
+                            <span class="fw-bold text-uppercase"
+                                >Services:</span
+                            >
+                            <br />
                             <span
                                 class="badge rounded-pill bg-danger mb-3"
                                 v-for="(service, index) in services"
@@ -57,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-lg-6 col-12">
                 <div class="map" id="map" ref="mapRef"></div>
             </div>
         </div>
