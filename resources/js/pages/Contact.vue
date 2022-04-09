@@ -13,7 +13,7 @@
                     <input checked v-model="apartment_id" class="form-check-input" type="radio" name="visible" id="number" v-bind:value="($route.params.id)">
                 </div>  -->
 
-                    <div class="form-group">
+                    <div class="form-group mb-5">
                         <label for="name">Name</label>
                         <input
                             v-model="name"
@@ -30,7 +30,7 @@
                             {{ error }}
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-5">
                         <label for="email">Email</label>
                         <input
                             v-model="email"
@@ -48,7 +48,7 @@
                             {{ error }}
                         </p>
                     </div>
-                    <div class="form-group mb-3">
+                    <div class="form-group mb-5">
                         <label for="message">Messagge</label>
                         <textarea
                             v-model="text"

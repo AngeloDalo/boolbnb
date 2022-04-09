@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row row-title-index">
-            <h1 class="h1 text-uppercase">Admin - All Apartments</h1>
+            <h1 class="fw-bold">Welcome <span class="text-uppercase">{{ Auth::user()->username }} </span>- Your Apartments</h1>
         </div>
         <!--message delate-->
         <div class="row">

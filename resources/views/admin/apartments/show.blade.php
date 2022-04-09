@@ -19,26 +19,26 @@
             <div class="col-sm- 12 col-md-12 col-lg-6">
                 <div class="d-flex flex-column">
                     <h3 class="card-title text-danger">{{ $apartment->title }}</h3>
-                    <span>Price: {{ $apartment->price }}&euro;</span>
-                    <span>Rooms: {{ $apartment->rooms }}</span>
-                    <span>Beds: {{ $apartment->beds }}</span>
-                    <span>Bathrooms: {{ $apartment->bathrooms }}</span>
-                    <span>Services:
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Price: </span> {{ $apartment->price }}&euro;</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Rooms: </span> {{ $apartment->rooms }}</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Beds: </span> {{ $apartment->beds }}</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Bathrooms: </span> {{ $apartment->bathrooms }}</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Services: </span>
                         @foreach ($apartment->services()->get() as $service)
                             <span class="badge rounded-pill bg-danger">
                                 {{ $service->name }}
                             </span>
                         @endforeach
                     </span>
-                    <span>Square: {{ $apartment->square }}m<sup>3</sup></span>
-                    <span>{{ $apartment->address }}</span>
-                    <span>Latitude: {{ $apartment->latitude }}</span>
-                    <span>Longitude: {{ $apartment->longitude }}</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Square: </span> {{ $apartment->square }}m<sup>3</sup></span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Address: </span> {{ $apartment->address }}</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Latitude: </span> {{ $apartment->latitude }}</span>
+                    <span class="mb-2"><span class="fw-bold text-uppercase">Longitude: </span> {{ $apartment->longitude }}</span>
                 </div>
             </div>
         </div>
-        <a class="btn btn-danger mt-5" href="{{ route('admin.apartments.index') }}">My Apartments</a>
-        <a class="btn btn-danger mt-5" href="{{ url('/') }}">Home</a>
+        <a class="btn btn-danger mt-5 text-white" href="{{ route('admin.apartments.index') }}">My Apartments</a>
+        <a class="btn btn-danger mt-5 text-white" href="{{ url('/') }}">Home</a>
         @if ($apartment->sponsorship()->get())
         @endif
 
