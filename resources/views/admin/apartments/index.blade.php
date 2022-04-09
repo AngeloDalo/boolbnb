@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table border border-danger">
+                <table class="table border border-danger text-center">
                     <thead>
                         <tr class="table-danger">
                             <th>Title</th>
@@ -45,7 +45,7 @@
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Edit</a>
                                 </td>
                                 @if ($apartment->end_date)
-                                <td><span>Sponsorship end: </span>{{ $apartment->end_date }}</td> 
+                                <td><span>Sponsorship end: </span><br>{{ $apartment->end_date }}</td> 
                                 @else 
                                     <td><a class="btn btn-danger text-white" href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorship</a></td>
                                 @endif
