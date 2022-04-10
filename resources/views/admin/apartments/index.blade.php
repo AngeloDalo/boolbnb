@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row row-title-index">
-            <h1 class="h1 text-uppercase">Admin - All Apartments</h1>
+            <h1 class="fw-bold">Welcome <span class="text-uppercase">{{ Auth::user()->username }} </span>- Your Apartments</h1>
         </div>
         <!--message delate-->
         <div class="row">
@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table border border-danger">
+                <table class="table border border-danger text-center">
                     <thead>
                         <tr class="table-danger">
                             <th>Title</th>
@@ -44,8 +44,11 @@
                                     <a class="btn btn-danger text-white"
                                         href="{{ route('admin.apartments.edit', $apartment->slug) }}">Edit</a>
                                 </td>
-                                <td><a class="btn btn-danger text-white"
-                                        href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorhip</a></td>
+                                @if ($apartment->end_date)
+                                <td><span>Sponsorship end: </span><br>{{ $apartment->end_date }}</td> 
+                                @else 
+                                    <td><a class="btn btn-danger text-white" href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsorship</a></td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

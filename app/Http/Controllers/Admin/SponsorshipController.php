@@ -44,11 +44,7 @@ class sponsorshipController extends Controller
         $pay_type = 'card';
         // $pay_transaction =  $data['_token'];
         $pay_transaction = 1;
-        
-    
         $apartment->sponsorship()->attach($data['Sponsorship'], ['start_date' => Carbon::now(), 'end_date' => Carbon::now()->addHours($sponsorship['time']), 'pay_type'=>$pay_type, 'pay_transaction' => $pay_transaction ]);
-
-
         return redirect()->route('admin.apartments.index');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Storage;
 use App\Apartment;
+use App\Sponsorship;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,20 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+        $apartments_sponsor = Apartment::where('user_id', Auth::user()->id)->with('sponsorship')->get();
+            foreach ($apartments_sponsor as $apartment_sponsor) {
+                if(count($apartment_sponsor->sponsorship) > 0) {
+                    $end_sponsor = $apartment_sponsor->sponsorship[0]->pivot->end_date;
+                    if (strlen($end_sponsor) > 0) {
+                        foreach ($apartments as $apartment) {
+                            if ($apartment->id == $apartment_sponsor->id) {
+                                $apartment['end_date'] = $end_sponsor;
+                            }
+                        }   
+                    }
+                }
+            }  
+        // $apartment_sponsor = Apartment::with('sponsorship')->get();
         return view('admin.apartments.index', ['apartments' => $apartments]);
     }
 

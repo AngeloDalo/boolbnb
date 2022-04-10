@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -8,7 +8,8 @@
                     <td>Title</td>
                     <td>Address</td>
                     <td>Visibility</td>
-                    <td colspan="3">Sponsors</td>          
+                    <td colspan="3">Sponsors</td>
+                    
                 </tr>
             </thead>
             <tbody >
@@ -17,13 +18,13 @@
                         <td> {{ $apartment->title }} </td>
                         <td> {{ $apartment->address }} </td>
                         <td>
-                            <form action="{{route('admin.sponsorship.update', $apartment->id)}}" method="get">
+                            <form action="{{route('admin.sponsorships.update', $apartment->id)}}" method="post">
                                 @csrf
                                 @method('PATCH')
                                 <select name="sponsors" id="sponsors">
-                                    @foreach ($sponsorships as $sponsorship)
-                                        <option value="{{ $sponsorship->id }}">
-                                            {{ $sponsorship->name }} | {{ $sponsorship->time }}hours | {{ $sponsorship->price }}€
+                                    @foreach ($sponsors as $sponsor)
+                                        <option value="{{ $sponsor->id }}">
+                                            {{ $sponsor->name }} | {{ $sponsor->duration }}hours | {{ $sponsor->price }}€
                                         </option>
                                     @endforeach
                                 </select>
@@ -35,4 +36,4 @@
             </tbody>
         </table>
     </div>
-@endsection
+@endsection --}}
