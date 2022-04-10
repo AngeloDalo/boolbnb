@@ -70,35 +70,83 @@
                         {{ sending ? "Sending mail..." : "Send" }}
                     </button>
                 </form>
-                    <button type="text" class="btn btn-danger text-white mt-2">
-                        <a
-                            href="javascript:history.back()"
-                            class="text-decoration-none text-white"
-                            >Back</a
-                        >
-                    </button>
+                <button type="text" class="btn btn-danger text-white mt-2">
+                    <a
+                        href="javascript:history.back()"
+                        class="text-decoration-none text-white"
+                        >Back</a
+                    >
+                </button>
             </div>
         </div>
         <footer class="bg-light text-center text-white footer-content">
-            <div class="text-center p-3 row" style="background-color: #032f6d;">
+            <div class="text-center p-3 row" style="background-color: #032f6d">
                 <section class="mb-4 col-2 col-md-3">
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/angelo-d-al%C3%B2-290325234/" role="button"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/AngeloDalo" role="button"><i class="fab fa-github"></i></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #0082ca"
+                        href="https://www.linkedin.com/in/angelo-d-al%C3%B2-290325234/"
+                        role="button"
+                        ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #333333"
+                        href="https://github.com/AngeloDalo"
+                        role="button"
+                        ><i class="fab fa-github"></i
+                    ></a>
                     <span>Angelo D'Alo'</span>
                 </section>
                 <section class="mb-4 col-2 col-md-3">
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/cristian-guzman-45178b157/" role="button"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/Guz117" role="button"><i class="fab fa-github"></i></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #0082ca"
+                        href="https://www.linkedin.com/in/cristian-guzman-45178b157/"
+                        role="button"
+                        ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #333333"
+                        href="https://github.com/Guz117"
+                        role="button"
+                        ><i class="fab fa-github"></i
+                    ></a>
                     <span>Cristian Guzman</span>
                 </section>
                 <section class="mb-4 col-2 col-md-3">
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/giandosaba/" role="button"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/GiandoSaba" role="button"><i class="fab fa-github"></i></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #0082ca"
+                        href="https://www.linkedin.com/in/giandosaba/"
+                        role="button"
+                        ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #333333"
+                        href="https://github.com/GiandoSaba"
+                        role="button"
+                        ><i class="fab fa-github"></i
+                    ></a>
                     <span>Giandomenico Sabato</span>
                 </section>
                 <section class="mb-4 col-2 col-md-3">
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/daniele-simonetti-/" role="button"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/Daniele-Simonetti" role="button"><i class="fab fa-github"></i></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #0082ca"
+                        href="https://www.linkedin.com/in/daniele-simonetti-/"
+                        role="button"
+                        ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <a
+                        class="btn btn-primary btn-floating m-1"
+                        style="background-color: #333333"
+                        href="https://github.com/Daniele-Simonetti"
+                        role="button"
+                        ><i class="fab fa-github"></i
+                    ></a>
                     <span>Daniele Simonetti</span>
                 </section>
                 <p class="love">Made with <span>&hearts;</span></p>
@@ -162,8 +210,7 @@ export default {
 
 <style lang="scss" scoped>
 .footer-content {
-    position: fixed;
-    bottom: 0;
+    margin-top: 5%;
     width: 100%;
 }
 </style>
