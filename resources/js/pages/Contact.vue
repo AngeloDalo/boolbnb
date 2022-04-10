@@ -69,14 +69,14 @@
                     <button type="submit" class="btn btn-danger text-white">
                         {{ sending ? "Sending mail..." : "Send" }}
                     </button>
-                    <button type="text" class="btn btn-danger text-white">
+                </form>
+                    <button type="text" class="btn btn-danger text-white mt-2">
                         <a
                             href="javascript:history.back()"
                             class="text-decoration-none text-white"
                             >Back</a
                         >
                     </button>
-                </form>
             </div>
         </div>
         <footer class="bg-light text-center text-white footer-content">
