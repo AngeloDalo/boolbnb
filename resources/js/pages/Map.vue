@@ -15,7 +15,6 @@
                         @keyup.enter="search()"
                         required
                     />
-                    <p id="searchDemo"></p>
                     <button
                         type="button"
                         class="btn btn-danger btn-search"
@@ -25,6 +24,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
+                    <p id="searchDemo" class="mt-2 p-2"></p>
 
                 <div>
                     <div class="row d-flex justify-content-evenly my-3">
@@ -366,6 +366,9 @@ export default {
 }
 
 div.form-outline {
+    width: 60%;
+}
+#searchDemo {
     width: 60%;
 }
 
