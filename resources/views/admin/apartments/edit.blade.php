@@ -179,7 +179,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="validationForm()"
+                        <button type="button" class="btn btn-danger text-white" onclick="validationForm()"
                             value="Submit form">Save</button>
                 </form>
             </div>

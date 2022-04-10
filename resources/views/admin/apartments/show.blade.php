@@ -38,7 +38,6 @@
             </div>
         </div>
         <a class="btn btn-danger mt-5 text-white" href="{{ route('admin.apartments.index') }}">My Apartments</a>
-        <a class="btn btn-danger mt-5 text-white" href="{{ url('/') }}">Home</a>
         @if ($apartment->sponsorship()->get())
         @endif
 

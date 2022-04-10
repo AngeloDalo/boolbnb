@@ -143,7 +143,7 @@
                 </div>
 
 
-                <button type="button" class="btn btn-danger" onclick="validationForm()" value="Submit form">Save</button>
+                <button type="button" class="btn btn-danger text-white" onclick="validationForm()" value="Submit form">Save</button>
             </form>
         </div>
     </div>

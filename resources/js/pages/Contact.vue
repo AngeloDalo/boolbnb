@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid mt-3">
-        <div class="container mt-5">
+        <div class="container mt-5 contact-box">
             <div v-if="success" class="alert alert-success" role="alert">
                 Message Sended!
             </div>
@@ -69,19 +69,20 @@
                     <button type="submit" class="btn btn-danger text-white">
                         {{ sending ? "Sending mail..." : "Send" }}
                     </button>
-                </form>
-                <button type="text" class="btn btn-danger text-white mt-2">
+                <!-- <button type="text" class="btn btn-danger text-white mt-2">
                     <a
                         href="javascript:history.back()"
                         class="text-decoration-none text-white"
                         >Back</a
                     >
-                </button>
+                </button> -->
+                    <a class="btn btn-danger text-white ms-2" href="javascript:history.back()">Back</a>
+                </form>
             </div>
         </div>
         <footer class="bg-light text-center text-white footer-content">
             <div class="text-center p-3 row" style="background-color: #032f6d">
-                <section class="mb-4 col-2 col-md-3">
+                <section class="mb-4 col-6 col-md-3">
                     <a
                         class="btn btn-primary btn-floating m-1"
                         style="background-color: #0082ca"
@@ -98,7 +99,7 @@
                     ></a>
                     <span>Angelo D'Alo'</span>
                 </section>
-                <section class="mb-4 col-2 col-md-3">
+                <section class="mb-4 col-6 col-md-3">
                     <a
                         class="btn btn-primary btn-floating m-1"
                         style="background-color: #0082ca"
@@ -115,7 +116,7 @@
                     ></a>
                     <span>Cristian Guzman</span>
                 </section>
-                <section class="mb-4 col-2 col-md-3">
+                <section class="mb-4 col-6 col-md-3">
                     <a
                         class="btn btn-primary btn-floating m-1"
                         style="background-color: #0082ca"
@@ -132,7 +133,7 @@
                     ></a>
                     <span>Giandomenico Sabato</span>
                 </section>
-                <section class="mb-4 col-2 col-md-3">
+                <section class="mb-4 col-6 col-md-3">
                     <a
                         class="btn btn-primary btn-floating m-1"
                         style="background-color: #0082ca"
@@ -212,5 +213,9 @@ export default {
 .footer-content {
     margin-top: 5%;
     width: 100%;
+}
+
+.contact-box {
+    height: 69vh;
 }
 </style>

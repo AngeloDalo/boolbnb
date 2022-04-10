@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -39,7 +39,7 @@
         </div>
 
         <input id="nonce" name="payment_method_nonce" type="hidden" />
-        <div class="pay text-center"><button class="btn-pay" type="submit"><span>Pay now</span></button></div>
+        <div class="pay text-center"><button class="btn btn-danger text-white" type="submit"><span>Pay now</span></button></div>
     </form>
 </div>
 
