@@ -396,6 +396,7 @@ div.form-outline {
 }
 .overflow-master {
     padding: 50px 100px 50px 100px;
+    background-color: white;
 }
 .div-img {
     position: relative;
