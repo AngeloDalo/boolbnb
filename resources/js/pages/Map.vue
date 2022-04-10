@@ -112,7 +112,11 @@
                         class="w-100 h-100 d-flex justify-content-center align-items-center"
                         v-if="apartments.length == 0"
                     >
-                        <h2 class="text-danger fw-bold">START YOUR SEARCH</h2>
+                        <img
+                            class="globe"
+                            :src="require('/public/img/time-to-travel (2).jpg')"
+                            alt=""
+                        />
                     </div>
                     <div v-else>
                         <div
@@ -320,6 +324,10 @@ export default {
 .overflow {
     height: 72vh;
     overflow-y: auto;
+}
+
+.globe {
+    width: 100%;
 }
 
 ::-webkit-scrollbar {
