@@ -14,7 +14,8 @@ class ApartmentSeeder extends Seeder
      */
     public function run()
     {
-        $apartments = [
+        $apartments = 
+        [
             [
                 'title' => 'Camera singola in appartamento nel centro di Taranto',
                 'price' => 20,
@@ -275,9 +276,116 @@ class ApartmentSeeder extends Seeder
                 'image' => 'uploads/camera_20.jpg',
                 'visible' => 0,
             ],
+            // ultimo 8 appartamenti
+            [
+                'title' => "Relax and Deluxe",
+                'price' => 90,
+                'rooms' => 2,
+                'beds' => 5,
+                'bathrooms' => 2,
+                'square' => 42,
+                'address' => '70023 Gioia del Colle BA, Italia',
+                'latitude' => '40.796728 ',
+                'longitude' => '16.92359',
+                'image' => 'uploads/camera_21.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "Intero alloggio: unità in affitto",
+                'price' => 175,
+                'rooms' => 4,
+                'beds' => 6,
+                'bathrooms' => 2,
+                'square' => 80,
+                'address' => 'Trani, Puglia, Italia',
+                'latitude' => '41.275088',
+                'longitude' => '16.4162585',
+                'image' => 'uploads/camera_22.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "Camera Doppia",
+                'price' => 65,
+                'rooms' => 1,
+                'beds' => 1,
+                'bathrooms' => 1,
+                'square' => 20,
+                'address' => '72029 Villa Castelli BR, Italia',
+                'latitude' => '40.584527',
+                'longitude' => '17.474605',
+                'image' => 'uploads/camera_23.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "Delia al Pigneto, cute studio fully equipped",
+                'price' => 80,
+                'rooms' => 2,
+                'beds' => 3,
+                'bathrooms' => 1,
+                'square' => 45,
+                'address' => '72017 Ostuni BR, Italia',
+                'latitude' => '40.727631',
+                'longitude' => '17.576406',
+                'image' => 'uploads/camera_24.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "CalanteLuna Relais",
+                'price' => 80,
+                'rooms' => 1,
+                'beds' => 2,
+                'bathrooms' => 1,
+                'square' => 55,
+                'address' => 'Via Piani Resinelli, 23811 Ballabio LC, Italia',
+                'latitude' => '45.90047766756308',
+                'longitude' => '9.41344639194881',
+                'image' => 'uploads/camera_25.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "Home sweet home, per sentirsi a casa",
+                'price' => 100,
+                'rooms' => 2,
+                'beds' => 4,
+                'bathrooms' => 2,
+                'square' => 75,
+                'address' => 'Leica, Via Giuseppe Mengoni, 4, 20121 Milano MI, Italia',
+                'latitude' => '45.46500819679929',
+                'longitude' => '9.188540849683392',
+                'image' => 'uploads/camera_26.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "B&B le tre virtù 3",
+                'price' => 95,
+                'rooms' => 3,
+                'beds' => 4,
+                'bathrooms' => 1,
+                'square' => 70,
+                'address' => 'Via Tito Minniti, 38089 Baitoni TN, Italia',
+                'latitude' => '45.80607987981537',
+                'longitude' => '10.551047306038413 ',
+                'image' => 'uploads/camera_27.jpg',
+                'visible' => 1,
+            ],
+            [
+                'title' => "Una terrazza al centro",
+                'price' => 30,
+                'rooms' => 1,
+                'beds' => 2,
+                'bathrooms' => 1,
+                'square' => 30,
+                'address' => 'Via Giulio Catoni, 28, 38123 Trento TN, Italia',
+                'latitude' => '46.007783288487076',
+                'longitude' => '11.128013840995578 ',
+                'image' => 'uploads/camera_28.jpg',
+                'visible' => 1,
+            ],
+            
         ];
 
-        foreach ($apartments as $apartment) {
+        foreach ($apartments as $apartment) 
+        {
             $newApartment = new Apartment();
             $newApartment->user_id = User::inRandomOrder()->first()->id;
             $newApartment->fill($apartment);
