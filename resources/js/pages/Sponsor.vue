@@ -159,6 +159,10 @@ export default {
     color: #032f6d;
 }
 
+footer {
+    overflow-x: hidden;
+}
+
 @media only screen and (max-width: 991px) {
     .cont-tot {
         height: 100%;
