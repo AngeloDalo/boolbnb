@@ -112,7 +112,7 @@ export default {
             Axios.get(url, {})
                 .then((result) => {
                     this.apartments = result.data.results.apartments;
-                    console.log(result.data.results.apartments);
+                    // console.log(result.data.results.apartments);
                 })
                 .catch((error) => {
                     console.log(error);

@@ -34,7 +34,7 @@
                     </ul> --}}
 
           <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto w-100 justify-content-between align-items-center ">
+          <ul class="mb-2 navbar-nav ml-auto w-100 justify-content-between align-items-center ">
             <!-- Authentication Links -->
             @guest
               <a class="navbar-brand" href="{{ url('/') }}">

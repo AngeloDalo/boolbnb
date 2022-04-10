@@ -172,11 +172,11 @@ export default {
     },
     mounted() {
         this.apartment_id = this.$route.params.id;
-        console.log(this.$route.params.id);
+        // console.log(this.$route.params.id);
     },
     methods: {
         sendForm() {
-            console.log(this.name, this.apartment_id);
+            // console.log(this.name, this.apartment_id);
             this.sending = true;
             this.success = false;
 

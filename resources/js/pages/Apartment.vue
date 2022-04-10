@@ -149,7 +149,7 @@ export default {
         //         });
         // },
         initializeMap() {
-            console.log(this.apartment);
+            // console.log(this.apartment);
             this.map = tt.map({
                 key: "2PavVFdEzd44ElVnixCMPjU42Wgfsj6Z",
                 container: this.$refs.mapRef,

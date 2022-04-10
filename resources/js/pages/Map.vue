@@ -318,7 +318,7 @@ export default {
             })
                 .then((result) => {
                     this.apartments = result.data.results.apartments;
-                    console.log(result.data);
+                    // console.log(result.data);
                     this.apartments.forEach((apartment) => {
                         let llApartment = new tt.LngLat(
                             apartment.longitude,

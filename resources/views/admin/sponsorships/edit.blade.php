@@ -61,7 +61,7 @@
       event.preventDefault();
       instance.requestPaymentMethod(function (err, payload) {
         if (err) {
-          console.log('Request Payment Method Error', err);
+          // console.log('Request Payment Method Error', err);
           return;
         }
         // Add the nonce to the form and submit
